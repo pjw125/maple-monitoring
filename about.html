@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사이트 소개 및 가이드 - 메이플스토리 활동 모니터</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.7;
+        }
+        .container { max-width: 750px; margin: 0 auto; background: var(--card-bg); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); }
+        h1 { color: var(--accent-color); font-size: 24px; margin-top: 0; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; }
+        h2 { color: var(--text-color); font-size: 18px; margin-top: 30px; }
+        p, li { font-size: 14px; color: var(--text-muted); }
+        ul { padding-left: 20px; }
+        .btn-back { display: inline-block; margin-top: 30px; padding: 10px 20px; background: var(--accent-color); color: #0f172a; font-weight: bold; text-decoration: none; border-radius: 8px; }
+        .btn-back:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 사이트 소개 및 시스템 가이드</h1>
+        
+        <p>환영합니다! 본 서비스는 넥슨 공식 Open API를 기반으로 메이플스토리 지인 및 친구들의 캐릭터 육성 상태와 활동 주기를 효율적으로 관리하고 모니터링하기 위해 제작된 비공식 팬 웨어러블 툴입니다.</p>
+
+        <h2>⚙️ 데이터 분석 및 진단 메커니즘</h2>
+        <p>메이플스토리 오픈 API의 구조적 특성을 반영하여 다차원 복합 분석 알고리즘을 도입하였습니다.</p>
+        <ul>
+            <li><b>7일 전후 경험치 대조:</b> 오늘 조회된 데이터와 정확히 일주일 전 데이터를 비교하여 누적 사냥 성취도를 측정합니다.</li>
+            <li><b>장비 스펙 기반 보스돌이 판정:</b> 7일간 경험치 변동량이 0%이더라도, 장착된 아이템의 스타포스 총합(100성 이상) 또는 주요 장비 착용 개수를 검사하여 주간 보스를 전담하는 '보스돌이 부캐' 여부를 판정합니다.</li>
+            <li><b>자동 백그라운드 갱신 시스템:</b> 과도한 API 호출(Rate Limit 에러)을 원천 차단하고 서버 부하를 줄이기 위해, 등록된 모든 캐릭터는 매일 오전 12시 및 오후 12시 정각 시점에 최신 상태로 동기화됩니다.</li>
+        </ul>
+
+        <h2>💡 이용 시 주의사항</h2>
+        <ul>
+            <li>저레벨 구간(250 레벨 미만)의 빈번한 경험치 변동으로 인한 오진단을 방지하기 위해 분석 기능은 250 레벨 이상 캐릭터를 기준으로 동작합니다.</li>
+            <li>등록된 모든 캐릭터 정보는 서버 DB에 전송되지 않으며, 사용자 본인의 브라우저(LocalStorage)에 안전하게 보관됩니다.</li>
+        </ul>
+
+        <a href="index.html" class="btn-back">← 메인 모니터로 돌아가기</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메이플스토리 캐릭터 활동 모니터</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --active-color: #10b981;
+            --boss-color: #ec4899;
+            --inactive-color: #f59e0b;
+            --link-gold: #fbbf24;
+        }
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 30px 15px;
+        }
+        .container { max-width: 750px; margin: 0 auto; }
+        
+        .search-box {
+            background: var(--card-bg);
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        input, select {
+            padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);
+            background: #0f172a; color: white; font-size: 15px;
+        }
+        input { flex: 1; min-width: 160px; }
+        select { cursor: pointer; min-width: 130px; }
+        
+        button {
+            padding: 12px 20px; background: var(--accent-color); color: #0f172a;
+            font-weight: bold; border: none; border-radius: 8px; cursor: pointer;
+        }
+        button:hover { opacity: 0.9; }
+
+        .btn-create-group {
+            background: #10b981;
+            color: #0f172a;
+        }
+
+        .top-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .group-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            width: 100%;
+        }
+        .tab-btn {
+            padding: 8px 18px;
+            border-radius: 20px;
+            background: #1e293b;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .tab-btn.active {
+            background: var(--accent-color);
+            color: #0f172a;
+            border-color: var(--accent-color);
+        }
+
+        .info-guide-box {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        #cardContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .btn-delete-top {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-delete-top:hover { background: #dc2626; }
+
+        .profile-header {
+            display: flex; align-items: center; gap: 20px;
+            padding-right: 60px;
+        }
+        
+        .char-img { 
+            width: 130px; 
+            height: 130px; 
+            background: linear-gradient(135deg, #0f172a, #334155); 
+            border: 2px solid var(--border-color);
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            flex-shrink: 0; 
+            overflow: hidden;
+        }
+        .char-img img { 
+            width: 140%; 
+            height: 140%; 
+            object-fit: contain; 
+            transform: scale(1.4);
+        }
+        
+        .badge {
+            display: inline-block; padding: 5px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 6px;
+        }
+        .badge-active { background: rgba(16, 185, 129, 0.2); color: var(--active-color); }
+        .badge-boss { background: rgba(236, 72, 153, 0.2); color: var(--boss-color); }
+        .badge-inactive { background: rgba(245, 158, 11, 0.2); color: var(--inactive-color); }
+
+        .group-select-inline {
+            background: #0284c7;
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 6px;
+            cursor: pointer;
+        }
+
+        .summary-box {
+            margin-top: 15px; 
+            background: #111827; 
+            padding: 12px 14px; 
+            border-radius: 8px; 
+            font-size: 13px; 
+            color: var(--text-muted); 
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .category-tag {
+            display: inline-block;
+            background: #334155;
+            color: #38bdf8;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+        .summary-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #64748b;
+            border-top: 1px solid #1e293b;
+            padding-top: 6px;
+            margin-top: 2px;
+        }
+
+        #loading { display: none; text-align: center; color: var(--accent-color); font-weight: bold; padding: 15px; }
+
+        /* 하단 푸터 스타일 */
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+        footer a {
+            color: var(--link-gold);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .footer-links {
+            margin-top: 6px;
+        }
+        .footer-links span {
+            margin: 0 4px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="mainContainer">
+    <h2>👥 메이플스토리 캐릭터 활동 모니터</h2>
+    
+    <div class="search-box">
+        <input type="text" id="charName" placeholder="캐릭터 닉네임 입력" onkeypress="if(event.key==='Enter') addOrUpdateCharacter()">
+        
+        <select id="groupSelect">
+            <!-- 동적 생성 -->
+        </select>
+
+        <button class="btn-create-group" onclick="createNewGroup()">+ 그룹 생성</button>
+        <button onclick="addOrUpdateCharacter()">캐릭터 추가</button>
+    </div>
+
+    <div class="top-controls">
+        <div class="group-tabs" id="groupTabs">
+            <!-- 탭 동적 생성 -->
+        </div>
+    </div>
+
+    <div class="info-guide-box" id="guideBox">
+        📌 <b>활동 상태 진단 안내:</b> 7일간 경험치 변동량과 장비 스펙을 분석합니다. (250 레벨 미만 분석 불가)<br>
+        ⏱️ <b>자동 갱신 안내:</b> 등록된 모든 캐릭터는 <b>매일 오전/오후 12시 고정 시점에 백그라운드에서 자동 갱신</b>됩니다.
+    </div>
+
+    <div id="loading">캐릭터 데이터를 분석하여 진단 문장을 생성하는 중...</div>
+
+    <div id="cardContainer"></div>
+
+    <!-- 페이지 이동형 푸터 -->
+    <footer>
+        <div>메이플스토리 공식 서비스와 관련 없는 비공식 팬 도구입니다.</div>
+        <div class="footer-links">
+            <a href="about.html">사이트 소개</a>
+            <span>·</span>
+            <a href="terms.html">이용약관</a>
+            <span>·</span>
+            <a href="privacy.html">개인정보처리방침</a>
+        </div>
+    </footer>
+</div>
+
+<script>
+const API_KEY = "test_2172c694670af1863be767e315e2fc19b4a346557f27f0124329d396ea565d46efe8d04e6d233bd35cf2fabdeb93fb0d";
+let currentTab = '전체';
+
+function getNextFixedRefreshTime() {
+    const now = new Date();
+    const hours = now.getHours();
+    
+    const next = new Date(now);
+    if (hours < 12) {
+        next.setHours(12, 0, 0, 0);
+    } else {
+        next.setHours(24, 0, 0, 0);
+    }
+    return next.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+
+async function fetchApi(url) {
+    try {
+        const res = await fetch(url, { headers: { 'x-nxopen-api-key': API_KEY } });
+        if (!res.ok) return null;
+        return await res.json();
+    } catch (e) {
+        return null;
+    }
+}
+
+function getDateStr(daysAgo) {
+    const d = new Date();
+    d.setDate(d.getDate() - daysAgo);
+    return d.toISOString().split('T')[0];
+}
+
+window.onload = function() {
+    let groups = getSavedGroups();
+    if (groups.length === 0) {
+        groups = ['친구'];
+        saveGroups(groups);
+    }
+    updateGroupDropdown();
+    renderGroupTabs();
+    renderSavedCards();
+
+    setInterval(autoRefreshAllCharacters, 12 * 60 * 60 * 1000);
+};
+
+function getSavedList() {
+    return JSON.parse(localStorage.getItem('maple_friends_list_v28') || '[]');
+}
+
+function saveList(list) {
+    localStorage.setItem('maple_friends_list_v28', JSON.stringify(list));
+}
+
+function getSavedGroups() {
+    return JSON.parse(localStorage.getItem('maple_custom_groups_v22') || '["친구"]');
+}
+
+function saveGroups(groups) {
+    localStorage.setItem('maple_custom_groups_v22', JSON.stringify(groups));
+}
+
+function updateGroupDropdown(keepSelectedVal = null) {
+    const select = document.getElementById('groupSelect');
+    const currentVal = keepSelectedVal !== null ? keepSelectedVal : select.value;
+    const groups = getSavedGroups();
+    
+    let html = groups.map(g => `<option value="${g}">${g}</option>`).join('');
+    select.innerHTML = html;
+    
+    if (currentVal && groups.includes(currentVal)) {
+        select.value = currentVal;
+    } else if (groups.length > 0) {
+        select.value = groups[0];
+    }
+}
+
+function createNewGroup() {
+    const inputName = prompt('새로 만들 그룹 이름을 입력하세요 (예: 본캐라인, 스트리머, 길드원):');
+    if (inputName && inputName.trim()) {
+        const newName = inputName.trim();
+        const groups = getSavedGroups();
+        if (!groups.includes(newName)) {
+            groups.push(newName);
+            saveGroups(groups);
+        }
+        updateGroupDropdown(newName);
+        renderGroupTabs();
+    }
+}
+
+function renderGroupTabs() {
+    const tabsContainer = document.getElementById('groupTabs');
+    const groups = ['전체', ...getSavedGroups()];
+
+    tabsContainer.innerHTML = groups.map(g => `
+        <button class="tab-btn ${currentTab === g ? 'active' : ''}" onclick="switchTab('${g}')">${g}</button>
+    `).join('');
+}
+
+function switchTab(groupName) {
+    currentTab = groupName;
+    renderGroupTabs();
+    renderSavedCards();
+}
+
+function checkIsBossSpec(equipmentData) {
+    if (!equipmentData || !equipmentData.item_equipment) return false;
+    let starforceSum = 0;
+    let equippedCount = 0;
+    
+    equipmentData.item_equipment.forEach(item => {
+        if (item.starforce) {
+            starforceSum += parseInt(item.starforce, 10) || 0;
+        }
+        equippedCount++;
+    });
+    return starforceSum >= 100 || equippedCount >= 10;
+}
+
+function generateUniqueDiagnosis(level, lvlDiff, totalExpChange, isMax, isBossSpec) {
+    if (level < 250) {
+        return { 
+            statusType: "inactive", 
+            badgeText: "💤 분석 불가", 
+            tag: "💤 [250 레벨 미만]", 
+            desc: `250 레벨 이하는 분석할 수 없습니다.` 
+        };
+    }
+
+    if (isMax) {
+        const maxTemplates = [
+            `만렙(Lv.300) 신화 속 영역 도달자! 경험치 바는 고정되어 있으나 최상위 보스 레이드와 엔드컨텐츠를 돌며 활발히 활동 중입니다.`,
+            `최정상 만렙 300레벨의 품격! 더 오를 경험치는 없지만 하드 보스 토벌 및 엔드컨텐츠를 매주 철저히 소화하고 있어요.`,
+            `메이플 정점에 선 Lv.300 만렙 유저입니다. 경험치는 멈췄어도 주간 보스와 칠흑 파밍을 놓치지 않는 철저한 현역 라이프!`
+        ];
+        return { statusType: "active", badgeText: "🔥 활발히 플레이 중!", tag: "🏆 만렙 신화급 엔드게이머", desc: maxTemplates[Math.floor(Math.random() * maxTemplates.length)] };
+    }
+
+    if (totalExpChange <= 0) {
+        if (isBossSpec) {
+            const bossMulePool = [
+                `최근 7일간 사냥 경험치 변동은 없으나, <b>보스 토벌이 가능한 탄탄한 장비 스펙</b>이 확인되었습니다! 사냥은 유기하고 주간 보스만 쏙쏙 골라먹는 <b>알짜배기 보스돌이 부캐</b> 유형이네요.`,
+                `일주일간 성장은 멈춰 있으나 장비 세팅으로 미루어보아 <b>주간 보스 숙제만 깔끔하게 소화하는 보스 전문러</b>로 진단됩니다.`
+            ];
+            return { statusType: "boss", badgeText: "⚔️ 활발한 보스돌이", tag: "🕵️‍♂️ [보스만 쏙쏙 골라먹는 보스돌이]", desc: bossMulePool[Math.floor(Math.random() * bossMulePool.length)] };
+        }
+
+        const restPool = [
+            `최근 7일간 경험치 변동이 없고 장비 스펙도 미비하여 조용히 에너지를 충전 중인 <b>휴식기</b> 상태입니다.`,
+            `일주일 동안 사냥 및 성장이 멈춰 있어 편안한 <b>휴식기</b>를 보내고 있는 것으로 진단됩니다.`,
+            `현재 별다른 성장 흔적이 감지되지 않는 <b>조용한 휴식기</b> 모드입니다.`
+        ];
+        return { statusType: "inactive", badgeText: "💤 휴식기", tag: "💤 [조용한 휴식기]", desc: restPool[Math.floor(Math.random() * restPool.length)] };
+    }
+
+    if (totalExpChange >= 5.0 || lvlDiff > 0) {
+        const hardcorePool = [
+            `Lv.${level}의 살인적인 경험치 통을 상대로 7일간 무려 <b>+${totalExpChange.toFixed(3)}%</b>를 밀어버렸습니다! 의자에서 엉덩이를 뗄 줄 모르는 진정한 <b>시간빌게이츠 / 홈프로텍터</b> 강림!`,
+            `상상 초월하는 광기의 사냥량! 고레벨 구간임에도 일주일 동안 경험치를 +${totalExpChange.toFixed(3)}% 폭발시키며 <b>홈프로텍터이자 시간빌게이츠</b> 타이틀을 당당히 거머쥐었습니다.`,
+            `메이플 서버가 마르지 않도록 달리는 중입니다. 7일간 누적 경험치 +${totalExpChange.toFixed(3)}%에 레벨 업까지 해내며 <b>시간빌게이츠/홈프로텍터</b> 인증 마크 획득!`
+        ];
+        return { statusType: "active", badgeText: "🔥 활발히 플레이 중!", tag: "👑 [시간빌게이츠 / 홈프로텍터]", desc: hardcorePool[Math.floor(Math.random() * hardcorePool.length)] };
+    } else {
+        const workerPool = [
+            `갓생과 메이플을 칼같이 겸비하신 <b>성실한 회사원</b> 유형! 지난 7일간 일일 숙제를 빼먹지 않고 채워 경험치 +${totalExpChange.toFixed(3)}%를 적립했습니다.`,
+            `직장인의 귀감 같은 플레이 패턴! 바쁜 와중에도 틈틈이 접속해 7일간 +${totalExpChange.toFixed(3)}%를 올리며 모범적인 <b>성실한 회사원</b>의 진수를 보여주네요.`,
+            `무리하지 않고 스케줄에 맞춰 영리하게 육성 중입니다. 일주일간 경험치 +${totalExpChange.toFixed(3)}% 상승으로 <b>성실한 회사원</b> 감성을 뿜어내는 중!`
+        ];
+        return { statusType: "active", badgeText: "🔥 활발히 플레이 중!", tag: "☕ [성실한 회사원 타입]", desc: workerPool[Math.floor(Math.random() * workerPool.length)] };
+    }
+}
+
+async function addOrUpdateCharacter(targetName = null) {
+    const nameInput = document.getElementById('charName');
+    const name = targetName || nameInput.value.trim();
+    const groupSelect = document.getElementById('groupSelect');
+    const selectedGroup = groupSelect.value;
+    
+    if (!name) return alert('캐릭터 닉네임을 입력해주세요!');
+    if (!selectedGroup) return alert('먼저 [+ 그룹 생성] 버튼을 눌러 그룹을 만들어주세요!');
+
+    const loading = document.getElementById('loading');
+    loading.style.display = 'block';
+
+    try {
+        const idData = await fetchApi(`https://open.api.nexon.com/maplestory/v1/id?character_name=${encodeURIComponent(name)}`);
+        if (!idData || !idData.ocid) throw new Error(`'${name}' 캐릭터를 찾을 수 없습니다.`);
+        const ocid = idData.ocid;
+
+        const todayStr = getDateStr(1);
+        const pastStr = getDateStr(7);
+
+        const [todayData, pastData, unionData, equipmentData] = await Promise.all([
+            fetchApi(`https://open.api.nexon.com/maplestory/v1/character/basic?ocid=${ocid}&date=${todayStr}`),
+            fetchApi(`https://open.api.nexon.com/maplestory/v1/character/basic?ocid=${ocid}&date=${pastStr}`),
+            fetchApi(`https://open.api.nexon.com/maplestory/v1/user/union?ocid=${ocid}&date=${todayStr}`),
+            fetchApi(`https://open.api.nexon.com/maplestory/v1/character/item-equipment?ocid=${ocid}&date=${todayStr}`)
+        ]);
+
+        if (!todayData) throw new Error('캐릭터 정보를 불러오지 못했습니다.');
+
+        const level = todayData.character_level;
+        const unionLevel = unionData ? unionData.union_level : '정보 없음';
+
+        const existingList = getSavedList();
+        const existingItem = existingList.find(i => i.name === todayData.character_name);
+        
+        let finalGroup = selectedGroup;
+        if (targetName && existingItem) {
+            finalGroup = existingItem.group;
+        }
+
+        const lvlDiff = pastData ? (level - pastData.character_level) : 0;
+        const todayExp = parseFloat(todayData.character_exp_rate || 0);
+        const pastExp = pastData ? parseFloat(pastData.character_exp_rate || 0) : 0;
+        const totalExpChange = pastData ? ((lvlDiff * 100) + (todayExp - pastExp)) : 0;
+        const isMax = level >= 300;
+
+        const isBossSpec = checkIsBossSpec(equipmentData);
+        const diagnosis = generateUniqueDiagnosis(level, lvlDiff, totalExpChange, isMax, isBossSpec);
+
+        const charInfo = {
+            name: todayData.character_name,
+            world: todayData.world_name,
+            className: todayData.character_class,
+            level: todayData.character_level,
+            expRate: todayData.character_exp_rate,
+            image: todayData.character_image,
+            union: unionLevel,
+            group: finalGroup,
+            statusType: diagnosis.statusType,
+            badgeText: diagnosis.badgeText,
+            category: diagnosis.tag,
+            desc: diagnosis.desc,
+            updatedAt: new Date().toLocaleTimeString(),
+            nextUpdateAt: getNextFixedRefreshTime()
+        };
+
+        let list = getSavedList().filter(item => item.name !== charInfo.name);
+        list.unshift(charInfo);
+        saveList(list);
+
+        renderGroupTabs();
+        renderSavedCards();
+        if (!targetName) {
+            nameInput.value = '';
+        }
+        loading.style.display = 'none';
+
+    } catch (err) {
+        alert(err.message);
+        loading.style.display = 'none';
+    }
+}
+
+async function autoRefreshAllCharacters() {
+    const list = getSavedList();
+    if (list.length === 0) return;
+
+    for (let char of list) {
+        try {
+            await addOrUpdateCharacter(char.name);
+        } catch (e) {
+            console.error(`${char.name} 자동 갱신 실패`, e);
+        }
+    }
+}
+
+function updateCharacterGroup(name, newGroup) {
+    let list = getSavedList();
+    const target = list.find(item => item.name === name);
+    if (target) {
+        target.group = newGroup;
+        saveList(list);
+        renderSavedCards();
+    }
+}
+
+function renderSavedCards() {
+    const container = document.getElementById('cardContainer');
+    let list = getSavedList();
+    const groups = getSavedGroups();
+
+    if (currentTab !== '전체') {
+        list = list.filter(char => char.group === currentTab);
+    }
+
+    if (list.length === 0) {
+        container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 30px;">등록된 캐릭터가 없습니다. 상단에서 닉네임을 검색해 추가해보세요!</div>`;
+        return;
+    }
+
+    container.innerHTML = list.map(char => {
+        let groupOptions = ``;
+        groups.forEach(g => {
+            groupOptions += `<option value="${g}" ${char.group === g ? 'selected' : ''}>${g}</option>`;
+        });
+
+        let badgeClass = 'badge-active';
+        if (char.statusType === 'boss') badgeClass = 'badge-boss';
+        else if (char.statusType === 'inactive') badgeClass = 'badge-inactive';
+
+        return `
+        <div class="card">
+            <button class="btn-delete-top" onclick="removeCharacter('${char.name}')">삭제</button>
+
+            <div class="profile-header">
+                <div class="char-img"><img src="${char.image}" alt="캐릭터"></div>
+                <div style="flex:1;">
+                    <div style="font-size: 18px; font-weight: bold; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                        ${char.name}
+                        <select class="group-select-inline" onchange="updateCharacterGroup('${char.name}', this.value)">
+                            ${groupOptions}
+                        </select>
+                    </div>
+                    <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">${char.world} / ${char.className}</div>
+                    <div style="font-size: 14px; margin-top: 5px; font-weight: bold;">
+                        Lv.${char.level} <span style="font-size:12px; color:var(--text-muted);">(${char.expRate}%)</span>
+                    </div>
+                    <div style="font-size: 12px; color: #38bdf8; margin-top: 2px; font-weight: bold;">
+                        🛡️ 유니온: ${char.union}
+                    </div>
+                    <div>
+                        <span class="badge ${badgeClass}">
+                            ${char.badgeText || '🔥 활발히 플레이 중!'}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="summary-box">
+                <div><span class="category-tag">${char.category}</span></div>
+                <div class="summary-content">📌 <b>상태 진단:</b> ${char.desc}</div>
+                <div class="summary-footer">
+                    <span>갱신: ${char.updatedAt || '방금 전'}</span>
+                    <span>(다음 자동 갱신: ${char.nextUpdateAt || '오전/오후 12시'})</span>
+                </div>
+            </div>
+        </div>
+        `;
+    }).join('');
+}
+
+function removeCharacter(name) {
+    if (!confirm(`'${name}' 캐릭터를 목록에서 삭제하시겠습니까?`)) return;
+    let list = getSavedList().filter(item => item.name !== name);
+    saveList(list);
+    renderSavedCards();
+}
+</script>
+
+</body>
+</html>
