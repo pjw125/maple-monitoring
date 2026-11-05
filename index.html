@@ -415,11 +415,11 @@ function generateUniqueDiagnosis(level, lvlDiff, totalExpChange, isMax, isBossSp
         };
     }
 
-    if (isMax) {
+   if (isMax) {
         const maxTemplates = [
-            `만렙(Lv.300) 신화 속 영역 도달자! 경험치 바는 고정되어 있으나 최상위 보스 레이드와 엔드컨텐츠를 돌며 활발히 활동 중입니다.`,
-            `최정상 만렙 300레벨의 품격! 더 오를 경험치는 없지만 하드 보스 토벌 및 엔드컨텐츠를 매주 철저히 소화하고 있어요.`,
-            `메이플 정점에 선 Lv.300 만렙 유저입니다. 경험치는 멈췄어도 주간 보스와 칠흑 파밍을 놓치지 않는 철저한 현역 라이프!`
+            `만렙(Lv.300) 신화 속 영역에 도달하신 것 같아요. 경험치 바는 고정되어 있으나 최상위 보스 레이드와 엔드컨텐츠를 돌며 활발히 활동 중인 것으로 판단되고 있어요~`,
+            `최정상 만렙 300레벨의 품격을 보여주고 계신 듯해요. 더 오를 경험치는 없지만 하드 보스 토벌 및 엔드컨텐츠를 매주 철저히 소화하고 있는 것 같아요.`,
+            `메이플 정점에 선 Lv.300 만렙 유저분이시네요. 경험치는 멈췄어도 주간 보스와 칠흑 파밍을 놓치지 않는 철저한 현역 라이프를 즐기는 중인 것 같아요!`
         ];
         return { statusType: "active", badgeText: "🔥 활발히 플레이 중!", tag: "🏆 만렙 신화급 엔드게이머", desc: maxTemplates[Math.floor(Math.random() * maxTemplates.length)] };
     }
@@ -427,32 +427,58 @@ function generateUniqueDiagnosis(level, lvlDiff, totalExpChange, isMax, isBossSp
     if (totalExpChange <= 0) {
         if (isBossSpec) {
             const bossMulePool = [
-                `최근 7일간 사냥 경험치 변동은 없으나, <b>보스 토벌이 가능한 탄탄한 장비 스펙</b>이 확인되었습니다! 사냥은 유기하고 주간 보스만 쏙쏙 골라먹는 <b>알짜배기 보스돌이 부캐</b> 유형이네요.`,
-                `일주일간 성장은 멈춰 있으나 장비 세팅으로 미루어보아 <b>주간 보스 숙제만 깔끔하게 소화하는 보스 전문러</b>로 진단됩니다.`
+                `최근 7일간 사냥 경험치 변동은 없으나, 보스 토벌이 가능한 탄탄한 장비 스펙이 확인되고 있어요! 사냥은 유기하고 주간 보스만 쏙쏙 골라먹는 알짜배기 보스돌이 부캐 유형인 것 같아요~`,
+                `일주일간 성장은 멈춰 있으나 장비 세팅으로 미루어보아 주간 보스 숙제만 깔끔하게 소화하는 보스 전문러로 진단되는 것 같아요.`
             ];
             return { statusType: "boss", badgeText: "⚔️ 활발한 보스돌이", tag: "🕵️‍♂️ [보스만 쏙쏙 골라먹는 보스돌이]", desc: bossMulePool[Math.floor(Math.random() * bossMulePool.length)] };
         }
 
         const restPool = [
-            `최근 7일간 경험치 변동이 없고 장비 스펙도 미비하여 조용히 에너지를 충전 중인 <b>휴식기</b> 상태입니다.`,
-            `일주일 동안 사냥 및 성장이 멈춰 있어 편안한 <b>휴식기</b>를 보내고 있는 것으로 진단됩니다.`,
-            `현재 별다른 성장 흔적이 감지되지 않는 <b>조용한 휴식기</b> 모드입니다.`
+            `최근 7일간 경험치 변동이 없고 장비 스펙도 미비하여 조용히 에너지를 충전 중인 휴식기 상태인 것 같아요.`,
+            `일주일 동안 사냥 및 성장이 멈춰 있어 편안한 휴식기를 보내고 있는 것으로 판단되고 있어요~`,
+            `현재 별다른 성장 흔적이 감지되지 않아 조용한 휴식기를 가지는 중인 것 같아요.`
         ];
         return { statusType: "inactive", badgeText: "💤 휴식기", tag: "💤 [조용한 휴식기]", desc: restPool[Math.floor(Math.random() * restPool.length)] };
     }
 
-    if (totalExpChange >= 9.0 || lvlDiff > 0) {
+    // 1단계: 접속만 하고 아주 살짝만 올린 라이트 유저 걸러내기 (예: 7일간 2% 미만)
+    if (totalExpChange < 2.0) {
+        const lightPool = [
+            `접속은 하였으나 사냥은 가끔만 즐기는 설렁설렁 라이트 유형인 것 같아요. 지난 7일간 소소하게 +${totalExpChange.toFixed(3)}%를 올리며 여유를 즐기고 계신 듯해요~`,
+            `바쁜 일상 속에 힐링용으로 가끔 접속하는 가벼운 산책러 감성인 것 같아요. 일주일간 +${totalExpChange.toFixed(3)}%의 가벼운 발자취가 남았네요.`
+        ];
+        return { statusType: "inactive", badgeText: "☕ 가끔 접속", tag: "🍃 [설렁설렁 라이트 유저]", desc: lightPool[Math.floor(Math.random() * lightPool.length)] };
+    }
+
+    // 2단계: 요청하신 빡빡한 레벨 구간별 하드코어 기준치(Threshold) 설정
+    let hardcoreThreshold = 700.0; // 나머지 (270 미만)
+    if (level >= 295) {
+        hardcoreThreshold = 10.0;
+    } else if (level >= 290) {
+        hardcoreThreshold = 20.0;
+    } else if (level >= 285) {
+        hardcoreThreshold = 50.0;
+    } else if (level >= 280) {
+        hardcoreThreshold = 100.0;
+    } else if (level >= 275) {
+        hardcoreThreshold = 250.0;
+    } else if (level >= 270) {
+        hardcoreThreshold = 400.0;
+    }
+
+    // 3단계: 동적 기준치 적용 판정
+    if (totalExpChange >= hardcoreThreshold || lvlDiff > 0) {
         const hardcorePool = [
-            `Lv.${level}의 살인적인 경험치 통을 상대로 7일간 무려 <b>+${totalExpChange.toFixed(3)}%</b>를 밀어버렸습니다! 의자에서 엉덩이를 뗄 줄 모르는 진정한 <b>시간빌게이츠 / 홈프로텍터</b> 강림!`,
-            `상상 초월하는 광기의 사냥량! 고레벨 구간임에도 일주일 동안 경험치를 +${totalExpChange.toFixed(3)}% 폭발시키며 <b>홈프로텍터이자 시간빌게이츠</b> 타이틀을 당당히 거머쥐었습니다.`,
-            `메이플 서버가 마르지 않도록 달리는 중입니다. 7일간 누적 경험치 +${totalExpChange.toFixed(3)}%에 레벨 업까지 해내며 <b>시간빌게이츠/홈프로텍터</b> 인증 마크 획득!`
+            `Lv.${level}의 살인적인 경험치 통을 상대로 7일간 무려 +${totalExpChange.toFixed(3)}%를 밀어버리신 것 같아요! 의자에서 엉덩이를 뗄 줄 모르는 진정한 시간빌게이츠 / 홈프로텍터가 강림한 듯해요~`,
+            `상상 초월하는 광기의 사냥량을 보여주고 계세요! 고레벨 구간임에도 일주일 동안 경험치를 +${totalExpChange.toFixed(3)}% 폭발시키며 홈프로텍터이자 시간빌게이츠 타이틀을 당당히 거머쥔 것으로 판단되고 있어요.`,
+            `메이플 서버가 마르지 않도록 불태우고 계신 것 같아요. 7일간 누적 경험치 +${totalExpChange.toFixed(3)}%에 레벨 업까지 해내며 시간빌게이츠/홈프로텍터 인증 마크를 획득하신 듯해요!`
         ];
         return { statusType: "active", badgeText: "🔥 활발히 플레이 중!", tag: "👑 [시간빌게이츠 / 홈프로텍터]", desc: hardcorePool[Math.floor(Math.random() * hardcorePool.length)] };
     } else {
         const workerPool = [
-            `갓생과 메이플을 칼같이 겸비하신 <b>성실한 회사원</b> 유형! 지난 7일간 일일 숙제를 빼먹지 않고 채워 경험치 +${totalExpChange.toFixed(3)}%를 적립했습니다.`,
-            `직장인의 귀감 같은 플레이 패턴! 바쁜 와중에도 틈틈이 접속해 7일간 +${totalExpChange.toFixed(3)}%를 올리며 모범적인 <b>성실한 회사원</b>의 진수를 보여주네요.`,
-            `무리하지 않고 스케줄에 맞춰 영리하게 육성 중입니다. 일주일간 경험치 +${totalExpChange.toFixed(3)}% 상승으로 <b>성실한 회사원</b> 감성을 뿜어내는 중!`
+            `갓생과 메이플을 칼같이 겸비하신 성실한 회사원 유형인 것 같아요! 지난 7일간 일일 숙제를 빼먹지 않고 채워 경험치 +${totalExpChange.toFixed(3)}%를 적립하신 듯해요~`,
+            `직장인의 귀감 같은 플레이 패턴을 보여주고 계세요. 바쁜 와중에도 틈틈이 접속해 7일간 +${totalExpChange.toFixed(3)}%를 올리며 모범적인 성실한 회사원의 진수를 뿜어내는 중인 것 같아요.`,
+            `무리하지 않고 스케줄에 맞춰 영리하게 육성 중이신 듯해요. 일주일간 경험치 +${totalExpChange.toFixed(3)}% 상승으로 성실한 회사원 감성을 잔뜩 보여주고 계신 것 같아요!`
         ];
         return { statusType: "active", badgeText: "🔥 활발히 플레이 중!", tag: "☕ [성실한 회사원 타입]", desc: workerPool[Math.floor(Math.random() * workerPool.length)] };
     }
