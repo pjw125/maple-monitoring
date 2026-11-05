@@ -107,7 +107,7 @@
             line-height: 1.5;
         }
 
-        /* 아코디언 UI 스타일 추가 */
+        /* 아코디언 UI 스타일 (내용이 길어져 max-height 넉넉하게 확장) */
         .criteria-toggle-wrap {
             margin-top: 10px;
             border-top: 1px dashed rgba(255, 255, 255, 0.15);
@@ -133,7 +133,7 @@
         .criteria-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
             font-size: 0.85em;
             color: var(--text-muted);
             background: rgba(15, 23, 42, 0.4);
@@ -141,7 +141,7 @@
             padding: 0 10px;
         }
         .criteria-content.open {
-            max-height: 350px;
+            max-height: 1200px; /* 상세 내용이 길어 스크롤 없이 전부 펼쳐지도록 넉넉하게 설정 */
             padding: 10px;
             margin-top: 6px;
         }
@@ -152,17 +152,17 @@
         .criteria-list {
             margin: 0;
             padding-left: 18px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         .criteria-list li {
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
         .criteria-sub {
-            margin-top: 8px;
+            margin-top: 10px;
             font-size: 0.9em;
             color: #cbd5e1;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 4px;
+            padding-top: 6px;
         }
 
         #cardContainer {
@@ -221,9 +221,31 @@
         .badge {
             display: inline-block; padding: 5px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 6px;
         }
-        .badge-active { background: rgba(16, 185, 129, 0.2); color: var(--active-color); }
-        .badge-boss { background: rgba(236, 72, 153, 0.2); color: var(--boss-color); }
-        .badge-inactive { background: rgba(245, 158, 11, 0.2); color: var(--inactive-color); }
+
+        /* 🎨 5% 단위 촘촘한 뱃지 색상 매핑 */
+        .badge-psycho { background: rgba(239, 68, 68, 0.25); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); } 
+        .badge-hardcore { background: rgba(245, 158, 11, 0.25); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); } 
+        .badge-step90 { background: rgba(234, 179, 8, 0.2); color: #facc15; }   
+        .badge-step85 { background: rgba(168, 85, 247, 0.2); color: #c084fc; }  
+        .badge-step80 { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }   
+        .badge-step75 { background: rgba(14, 165, 233, 0.2); color: #38bdf8; }   
+        .badge-step70 { background: rgba(20, 184, 166, 0.2); color: #2dd4bf; }   
+        .badge-step65 { background: rgba(16, 185, 129, 0.2); color: #34d399; }   
+        .badge-step60 { background: rgba(132, 204, 22, 0.2); color: #a3e635; }   
+        .badge-step55 { background: rgba(250, 204, 21, 0.2); color: #fde047; }   
+        .badge-step50 { background: rgba(251, 146, 60, 0.2); color: #fdba74; }   
+        .badge-step45 { background: rgba(248, 113, 113, 0.2); color: #fca5a5; }  
+        .badge-step40 { background: rgba(244, 63, 94, 0.2); color: #fb7185; }    
+        .badge-step35 { background: rgba(236, 72, 153, 0.2); color: #f472b6; }   
+        .badge-step30 { background: rgba(217, 70, 239, 0.2); color: #e879f9; }   
+        .badge-step25 { background: rgba(168, 85, 247, 0.2); color: #d8b4fe; }  
+        .badge-step20 { background: rgba(129, 140, 248, 0.2); color: #a5b4fc; }  
+        .badge-step15 { background: rgba(96, 165, 250, 0.2); color: #93c5fd; }   
+        .badge-step10 { background: rgba(56, 189, 248, 0.2); color: #7dd3fc; }   
+        .badge-step5 { background: rgba(45, 212, 191, 0.2); color: #5eead4; }     
+        .badge-monthly { background: rgba(148, 163, 184, 0.2); color: #94a3b8; }
+        .badge-boss { background: rgba(236, 72, 153, 0.2); color: #ec4899; }
+        .badge-inactive { background: rgba(100, 116, 139, 0.25); color: #64748b; }
 
         .group-select-inline {
             background: #0284c7;
@@ -320,19 +342,22 @@
         </div>
     </div>
 
-    <!-- 가이드 박스 및 아코디언 UI 추가 -->
+    <!-- 가이드 박스 및 아코디언 UI (상세 분류 내용 전체 풀림 적용) -->
     <div class="info-guide-box" id="guideBox">
         📌 <b>활동 상태 진단 안내:</b> 7일간 경험치 변동량과 장비 스펙을 분석합니다. (250 레벨 미만 분석 불가)<br>
         ⏱️ <b>자동 갱신 안내:</b> 등록된 모든 캐릭터는 <b>매일 오전/오후 12시 고정 시점에 백그라운드에서 자동 갱신</b>됩니다.
         
         <div class="criteria-toggle-wrap">
             <button type="button" class="criteria-btn" onclick="toggleCriteria()">
-                <span>📊 활동 상태 및 하드코어 기준치 상세 안내 보기</span>
+                <span>📊 5% 단위 창의적 진단 기준 상세보기 (전체 내용 보기)</span>
                 <span id="toggleArrow">▼</span>
             </button>
             <div class="criteria-content" id="criteriaContent">
                 <div class="criteria-desc">
-                    7일간 누적 경험치 상승량과 장비 스펙을 바탕으로 진단됩니다. 고레벨 구간의 빡빡한 사냥 난이도를 반영하여 레벨별로 기준이 다르게 적용돼요!
+                    레벨별 하드코어 기준치를 100%로 두고, <b>5% 구간마다 캐릭터의 1주일간 실제 경험치 상승량과 플레이 성향</b>을 풍성한 위트와 창의적인 칭호로 진단합니다!
+                </div>
+                <div class="criteria-desc" style="margin-top: 8px;">
+                    <b>📌 레벨별 1주일 기준치 (100% 기준) 안내:</b>
                 </div>
                 <ul class="criteria-list">
                     <li><b>Lv. 295 이상:</b> 1주일 10% 이상 상승</li>
@@ -343,8 +368,35 @@
                     <li><b>Lv. 270 ~ 274:</b> 1주일 400% 이상 상승</li>
                     <li><b>기타 (270 미만):</b> 1주일 700% 이상 상승</li>
                 </ul>
+                <div class="criteria-desc" style="margin-top: 10px;">
+                    <b>✨ 5% 단위 세부 분류 및 창의적 칭호 안내:</b>
+                </div>
+                <ul class="criteria-list">
+                    <li>👑 <b>영혼의 홈프로텍터 (150%+):</b> 기준치 대비 150% 이상 폭발적 상승 (현실을 잊은 광기의 사냥러)</li>
+                    <li>⚡ <b>심연의 사냥광 (100% ~ 150%):</b> 기준치 대비 100% 이상 달성 (의자 방석이 녹아버린 진성 사냥광)</li>
+                    <li>🏆 <b>월드 클래스 (95% ~ 100%):</b> 기준치 대비 95% 이상 달성 (완주를 목전에 둔 랭커)</li>
+                    <li>🌟 <b>숨은 메카니크 (90% ~ 95%):</b> 기준치 대비 90% 이상 달성 (동선을 꿰뚫는 고수)</li>
+                    <li>💎 <b>철인 마라토너 (85% ~ 90%):</b> 기준치 대비 85% 이상 달성 (지치지 않는 지구력)</li>
+                    <li>🏅 <b>상위권 우등생 (80% ~ 85%):</b> 기준치 대비 80% 이상 달성 (숙제와 사냥을 잡는 우등생)</li>
+                    <li>🎖️ <b>칼각 잡힌 모범생 (75% ~ 80%):</b> 기준치 대비 75% 이상 달성 (철저한 스케줄러)</li>
+                    <li>🎯 <b>황금 페이스 메이커 (70% ~ 75%):</b> 기준치 대비 70% 이상 달성 (이상적인 리듬)</li>
+                    <li>🔥 <b>불타는 열정맨 (65% ~ 70%):</b> 기준치 대비 65% 이상 달성 (사냥터를 지지는 열정)</li>
+                    <li>💪 <b>근성의 퀘스트 장인 (60% ~ 65%):</b> 기준치 대비 60% 이상 달성 (내실을 다지는 장인)</li>
+                    <li>💼 <b>메이플 주식회사 과장 (55% ~ 60%):</b> 기준치 대비 55% 이상 달성 (출근 도장 찍는 과장님)</li>
+                    <li>💼 <b>갓생과 메생의 반반 (50% ~ 55%):</b> 기준치 대비 50% 이상 달성 (현실과 게임의 반반 능력자)</li>
+                    <li>🚶‍♂️ <b>느긋한 산책러 (45% ~ 50%):</b> 기준치 대비 45% 이상 달성 (콧바람 쐬는 산책러)</li>
+                    <li>🚶‍♂️ <b>마을 마실러 (40% ~ 45%):</b> 기준치 대비 40% 이상 달성 (사냥터보다 마을이 편한 유저)</li>
+                    <li>☕ <b>주말의 연금술사 (35% ~ 40%):</b> 기준치 대비 35% 이상 달성 (주말에 에너지를 폭발시키는 타입)</li>
+                    <li>☕ <b>여유로운 찻잔러 (30% ~ 35%):</b> 기준치 대비 30% 이상 달성 (따뜻한 차 한잔의 힐링)</li>
+                    <li>🛋️ <b>로비의 터대주주 (25% ~ 30%):</b> 기준치 대비 25% 이상 달성 (코디와 친목에 올인한 유지)</li>
+                    <li>🛋️ <b>메인 화면 감상러 (20% ~ 25%):</b> 기준치 대비 20% 이상 달성 (브금과 캐릭터 얼굴 감상러)</li>
+                    <li>🍃 <b>바람 같은 나그네 (15% ~ 20%):</b> 기준치 대비 15% 이상 달성 (공기만 쐬고 떠나는 나그네)</li>
+                    <li>🍃 <b>가끔 찾는 별장 주인 (10% ~ 15%):</b> 기준치 대비 10% 이상 달성 (한 주에 한두 번 문 여는 별장)</li>
+                    <li>🌱 <b>새싹 발자국 (5% ~ 10%):</b> 기준치 대비 5% 이상 달성 (모래성에 남긴 소중한 첫 발자국)</li>
+                    <li>💤 <b>월간 방문객 (0% ~ 5% 미만):</b> 5% 미만 상승 (한 달에 한 번 문안 인사 드리는 귀환러)</li>
+                </ul>
                 <div class="criteria-sub">
-                    * 장비 스펙이 일정 수준 이상이면서 경험치 상승량이 없는 경우 '보스돌이'로 판명되며, 레벨과 관계없이 2% 미만 상승 시 '라이트 유저'로 분류됩니다.
+                    * 장비 스펙(스타포스 합산 100 이상 또는 장비 10개 이상 착용)이 일정 수준 이상이면서 경험치 상승량이 0%인 경우 사냥을 유기한 <b>'보스돌이'</b>로 판명됩니다.
                 </div>
             </div>
         </div>
@@ -501,82 +553,228 @@ function checkIsBossSpec(equipmentData) {
     return starforceSum >= 100 || equippedCount >= 10;
 }
 
+// 🎯 경험치 m% 상승 연동 + 창의적 칭호 및 진단 로직 함수
 function generateUniqueDiagnosis(level, lvlDiff, totalExpChange, isMax, isBossSpec) {
     if (level < 250) {
         return { 
             statusType: "inactive", 
             badgeText: "💤 분석 불가", 
             tag: "💤 [250 레벨 미만]", 
-            desc: `250 레벨 이하는 분석할 수 없습니다.` 
+            desc: `250 레벨 이하는 API 데이터 정책상 정밀 분석이 불가능합니다.` 
         };
     }
 
     if (isMax) {
         const maxTemplates = [
-            `만렙(Lv.300) 신화 속 영역에 도달하신 것 같아요. 경험치 바는 고정되어 있으나 최상위 보스 레이드와 엔드컨텐츠를 돌며 활발히 활동 중인 것으로 판단되고 있어요~`,
-            `최정상 만렙 300레벨의 품격을 보여주고 계신 듯해요. 더 오를 경험치는 없지만 하드 보스 토벌 및 엔드컨텐츠를 매주 철저히 소화하고 있는 것 같아요.`,
-            `메이플 정점에 선 Lv.300 만렙 유저분이시네요. 경험치는 멈췄어도 주간 보스와 칠흑 파밍을 놓치지 않는 철저한 현역 라이프를 즐기는 중인 것 같아요!`
+            `만렙(Lv.300) 신화 속 영역에 도달하신 전설의 유저분이에요! 경험치 바는 멈췄지만 최상위 보스 레이드와 칠흑 파밍으로 서버를 지배하는 현역 라이프를 즐기는 중이시네요~`,
+            `최정상 만렙 300레벨의 고결한 품격! 더 오를 경험치는 없지만 매주 하드 보스를 싹쓸이하며 엔드 콘텐츠의 진수를 보여주고 계신 완벽한 만렙 고수예요.`,
+            `메이플 정점에 군림한 Lv.300 만렙 현역러! 사냥은 졸업했어도 주간 보스 숙제만큼은 철저히 소화하며 메세상을 호령하고 있는 멋진 모험가님이세요.`
         ];
-        return { statusType: "active", badgeText: "🔥 활발히 플레이 중!", tag: "🏆 만렙 신화급 엔드게이머", desc: maxTemplates[Math.floor(Math.random() * maxTemplates.length)] };
+        return { statusType: "psycho", badgeText: "🏆 만렙 신화급", tag: "🏆 [만렙 신화급 엔드게이머]", desc: maxTemplates[Math.floor(Math.random() * maxTemplates.length)] };
     }
 
     if (totalExpChange <= 0) {
         if (isBossSpec) {
             const bossMulePool = [
-                `최근 7일간 사냥 경험치 변동은 없으나, 장비 스펙이 일정 수준 이상인 것으로 확인되고 있어요! 사냥은 유기하고 주간 보스만 쏙쏙 골라먹는 보스돌이 부캐로 판명되는 것 같아요~`,
-                `일주일간 성장은 멈춰 있으나 장비 세팅으로 미루어보아 주간 보스 숙제만 깔끔하게 소화하는 보스 전문러로 진단되는 것 같아요.`
+                `최근 7일간 사냥 경험치는 0%이지만 고스펙 장비 세팅이 번쩍번쩍 빛나고 있어요! 사냥은 칼같이 유기하고 주간 보스만 쏙쏙 골라먹는 영리한 보스돌이 부캐로 판명되었어요~`,
+                `일주일간 성장은 멈춰 있으나 장비 옵션과 스타포스로 미루어보아 주간 보스 쌀먹 및 숙제 레이드만 깔끔하게 도는 전형적인 보스 전문 부캐 라인이시네요.`
             ];
-            return { statusType: "boss", badgeText: "⚔️ 활발한 보스돌이", tag: "🕵️‍♂️ [보스만 쏙쏙 골라먹는 보스돌이]", desc: bossMulePool[Math.floor(Math.random() * bossMulePool.length)] };
+            return { statusType: "boss", badgeText: "⚔️ 보스돌이 전문", tag: "🕵️‍♂️ [보스만 쏙쏙 골라먹는 보스돌이]", desc: bossMulePool[Math.floor(Math.random() * bossMulePool.length)] };
         }
 
         const restPool = [
-            `최근 7일간 경험치 변동이 없고 장비 스펙도 미비하여 조용히 에너지를 충전 중인 휴식기 상태인 것 같아요.`,
-            `일주일 동안 사냥 및 성장이 멈춰 있어 편안한 휴식기를 보내고 있는 것으로 판단되고 있어요~`,
-            `현재 별다른 성장 흔적이 감지되지 않아 조용한 휴식기를 가지는 중인 것 같아요.`
+            `최근 7일간 경험치 변동이 전혀 없고 장비 스펙도 조용한 상태예요. 현실 세계의 바쁜 일정을 소화하며 편안한 재충전의 휴식기를 보내고 계신 듯해요~`,
+            `일주일 동안 사냥터에 발길을 끊고 에너지를 푹 충전 중이신 휴면 모드예요. 곧 다부진 모습으로 돌아오실 메이플 휴식기를 가지는 중이네요.`,
+            `현재 성장의 흔적이 감지되지 않아 조용히 숨고르기를 하는 휴식기 상태예요. 잠시 마음의 여유를 갖고 메캉스(메이플+바캉스)를 즐기는 중이신가 봐요!`
         ];
-        return { statusType: "inactive", badgeText: "💤 휴식기", tag: "💤 [조용한 휴식기]", desc: restPool[Math.floor(Math.random() * restPool.length)] };
+        return { statusType: "inactive", badgeText: "💤 조용한 휴식기", tag: "💤 [꿀맛 같은 휴식기]", desc: restPool[Math.floor(Math.random() * restPool.length)] };
     }
 
-    // 레벨 관계없이 2% 미만 상승 시 라이트 유저 분류
-    if (totalExpChange < 2.0) {
-        const lightPool = [
-            `접속은 하였으나 사냥은 가끔만 즐기는 라이트 유저로 분류되는 것 같아요. 지난 7일간 소소하게 +${totalExpChange.toFixed(3)}%를 올리며 여유를 즐기고 계신 듯해요~`,
-            `바쁜 일상 속에 힐링용으로 가끔 접속하는 가벼운 발자취가 남았네요. 일주일간 +${totalExpChange.toFixed(3)}% 상승으로 가볍게 즐기는 중인 것 같아요.`
-        ];
-        return { statusType: "inactive", badgeText: "☕ 가끔 접속", tag: "🍃 [설렁설렁 라이트 유저]", desc: lightPool[Math.floor(Math.random() * lightPool.length)] };
+    let hardcoreThreshold = 700.0;
+    if (level >= 295) hardcoreThreshold = 10.0;
+    else if (level >= 290) hardcoreThreshold = 20.0;
+    else if (level >= 285) hardcoreThreshold = 50.0;
+    else if (level >= 280) hardcoreThreshold = 100.0;
+    else if (level >= 275) hardcoreThreshold = 250.0;
+    else if (level >= 270) hardcoreThreshold = 400.0;
+
+    const ratio = (totalExpChange / hardcoreThreshold) * 100;
+
+    if (ratio >= 150) {
+        return { 
+            statusType: "psycho", 
+            badgeText: "🔥 영혼의 홈프로텍터", 
+            tag: "👑 [현실을 잊은 영혼의 홈프로텍터]", 
+            desc: `지난 7일간 무려 +${totalExpChange.toFixed(3)}%를 폭발적으로 상승시키셨어요! 사냥터 의자에 영혼을 저당 잡힌 채 몬스터를 학살 중이신 엄청난 광기의 홈프로텍터예요ㄷㄷ` 
+        };
+    }
+    if (ratio >= 100) {
+        return { 
+            statusType: "hardcore", 
+            badgeText: "⚡ 심연의 사냥광", 
+            tag: "⚡ [의자 방석이 녹아버린 사냥광]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 경험치를 밀어 올리셨어요! 엉덩이를 뗄 줄 모르는 진정한 하드코어 사냥러의 품격을 뿜어내고 계시네요!` 
+        };
+    }
+    if (ratio >= 95) {
+        return { 
+            statusType: "step90", 
+            badgeText: "🏆 월드 클래스", 
+            tag: "🏆 [완주를 목전에 둔 월드 클래스 랭커]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 채우셨어요! 목표치 완주를 코앞에 두고 눈에 불을 켜며 사냥에 매진하는 최상위 집중력이에요!` 
+        };
+    }
+    if (ratio >= 90) {
+        return { 
+            statusType: "step85", 
+            badgeText: "🌟 숨은 메카니크", 
+            tag: "🌟 [동선을 꿰뚫는 숨은 메카니크 고수]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 올리셨네요! 효율적인 사냥 동선과 빌드를 완벽하게 이해하고 묵묵히 레벨을 깎아내리는 고수 모드예요.` 
+        };
+    }
+    if (ratio >= 85) {
+        return { 
+            statusType: "step80", 
+            badgeText: "💎 철인 마라토너", 
+            tag: "💎 [지치지 않는 철인 마라토너]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 경험치를 쌓으셨어요! 장거리 레이스도 숨 한번 안 차고 거뜬히 소화해 내는 엄청난 지구력의 마라토너시네요.` 
+        };
+    }
+    if (ratio >= 80) {
+        return { 
+            statusType: "step75", 
+            badgeText: "🏅 상위권 우등생", 
+            tag: "🏅 [숙제와 사냥을 잡는 우등생]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 달성하셨어요! 일일 퀘스트와 사냥 빌드를 척척 해내며 학급 반장 같은 모범적인 성장을 보여주고 있어요.` 
+        };
+    }
+    if (ratio >= 75) {
+        return { 
+            statusType: "step70", 
+            badgeText: "🎖️ 칼각 잡힌 모범생", 
+            tag: "🎖️ [칼각 잡힌 스케줄러 모범생]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 성장이 있었어요! 하루 일과표를 철저하게 계산해서 접속 시간마다 알차게 경험치를 빨아들이는 모범생 스타일이에요.` 
+        };
+    }
+    if (ratio >= 70) {
+        return { 
+            statusType: "step65", 
+            badgeText: "🎯 황금 페이스 메이커", 
+            tag: "🎯 [이상적인 리듬의 페이스 메이커]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 올리셨네요! 과하지도 않고 모자라지도 않은 아주 이상적인 속도로 메이플 라이프를 즐기는 중이시네요.` 
+        };
+    }
+    if (ratio >= 65) {
+        return { 
+            statusType: "step60", 
+            badgeText: "🔥 불타는 열정맨", 
+            tag: "🔥 [사냥터를 지지는 불타는 열정맨]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 경험치를 적립하셨어요! 가슴속 뜨거운 메이플 열정으로 사냥터 버닝 필드를 아주 활활 지져버리고 계세요!` 
+        };
+    }
+    if (ratio >= 60) {
+        return { 
+            statusType: "step55", 
+            badgeText: "💪 근성의 퀘스트 장인", 
+            tag: "💪 [내실을 탄탄히 다지는 장인]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 성실히 채우셨네요! 화려하진 않아도 묵묵하게 일퀘와 숙제를 다져나가는 듬직한 내실 장인이세요.` 
+        };
+    }
+    if (ratio >= 55) {
+        return { 
+            statusType: "step50", 
+            badgeText: "💼 메이플 주식회사 과장", 
+            tag: "💼 [출근 도장 찍는 메이플 과장님]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 발자취가 남았어요! 마치 회사 출근하듯 정해진 시간에 딱 접속해서 할 일을 깔끔하게 해치우는 베테랑 직장인 포스예요.` 
+        };
+    }
+    if (ratio >= 50) {
+        return { 
+            statusType: "step45", 
+            badgeText: "💼 갓생과 메생의 반반", 
+            tag: "💼 [현실과 게임을 반반 스까 먹는 능력자]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 올리셨네요! 현실 갓생 살기와 메이플 중독 사이의 절묘한 균형을 유지하며 알차게 성취를 거두셨네요.` 
+        };
+    }
+    if (ratio >= 45) {
+        return { 
+            statusType: "step40", 
+            badgeText: "🚶‍♂️ 느긋한 산책러", 
+            tag: "🚶‍♂️ [바람을 쐬며 걷는 느긋한 산책러]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 소소한 성장이 있었어요! 급할 것 하나 없다는 마인드로 콧바람을 쐬며 여유롭게 경치를 구경하며 사냥 중이시군요.` 
+        };
+    }
+    if (ratio >= 40) {
+        return { 
+            statusType: "step35", 
+            badgeText: "🚶‍♂️ 마을 마실러", 
+            tag: "🚶‍♂️ [사냥터보다 마을이 편한 마실러]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 올리셨네요! 사냥터 경마장보다는 헤네시스 앞마당에서 수다 떨거나 마실 다니는 게 더 체질이신가 봐요~` 
+        };
+    }
+    if (ratio >= 35) {
+        return { 
+            statusType: "step30", 
+            badgeText: "☕ 주말의 연금술사", 
+            tag: "☕ [주말에 에너지를 폭발시키는 연금술사]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 경험치를 쌓으셨어요! 평일에는 바쁘다 주말 한정으로 사냥 포션을 벌컥벌컥 마시며 달리는 주말형 연금술사예요.` 
+        };
+    }
+    if (ratio >= 30) {
+        return { 
+            statusType: "step25", 
+            badgeText: "☕ 여유로운 찻잔러", 
+            tag: "☕ [따뜻한 차 한잔의 여유 찻잔러]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 올리셨네요! 손에 찻잔을 들고 클래식 음악을 들으며 가볍고 우아하게 몬스터를 스치듯 잡아주고 계시네요.` 
+        };
+    }
+    if (ratio >= 25) {
+        return { 
+            statusType: "step20", 
+            badgeText: "🛋️ 로비의 터대주주", 
+            tag: "🛋️ [의자 코디와 친목의 터대주주]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 잔잔한 발자취가 남았어요! 사냥은 경치만 구경하고 의자에 앉아 캐시 코디 매칭과 친목 다지기에 올인 중인 로비의 유지예요.` 
+        };
+    }
+    if (ratio >= 20) {
+        return { 
+            statusType: "step15", 
+            badgeText: "🛋️ 메인 화면 감상러", 
+            tag: "🛋️ [브람스만 감상하는 메인 화면러]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 올리셨네요! 게임을 켜두고 메인 화면 브금(BGM)을 감상하거나 캐릭터 성형·헤어 돌리기에 심취해 계실 분이군요.` 
+        };
+    }
+    if (ratio >= 15) {
+        return { 
+            statusType: "step10", 
+            badgeText: "🍃 바람 같은 나그네", 
+            tag: "🍃 [공기만 쐬고 홀연히 떠나는 나그네]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 소소한 성장이 있었어요! 스르륵 접속해서 메이플 월드의 신선한 공기만 한 모금 마시고 바람처럼 사라지는 자유로운 영혼이에요.` 
+        };
+    }
+    if (ratio >= 10) {
+        return { 
+            statusType: "step5", 
+            badgeText: "🍃 가끔 찾는 별장 주인", 
+            tag: "🍃 [문만 열고 털고 가는 별장 주인]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 올리셨네요! 한 주에 딱 한두 번 문을 열고 가볍게 먼지만 털어내고 가는 소중한 별장 같은 캐릭터예요.` 
+        };
+    }
+    if (ratio >= 5) {
+        return { 
+            statusType: "monthly", 
+            badgeText: "🌱 새싹 발자국", 
+            tag: "🌱 [모래성에 새겨진 소중한 새싹 발자국]", 
+            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 미세한 성장이 감지되었어요! 광활한 메이플 월드 모래사장에 아주 앙증맞고 귀여운 첫 발자국을 꾹 눌러 담고 가셨어요.` 
+        };
     }
 
-    // 빡빡한 레벨 구간별 하드코어 기준치 설정
-    let hardcoreThreshold = 700.0; // 270 미만
-    if (level >= 295) {
-        hardcoreThreshold = 10.0;
-    } else if (level >= 290) {
-        hardcoreThreshold = 20.0;
-    } else if (level >= 285) {
-        hardcoreThreshold = 50.0;
-    } else if (level >= 280) {
-        hardcoreThreshold = 100.0;
-    } else if (level >= 275) {
-        hardcoreThreshold = 250.0;
-    } else if (level >= 270) {
-        hardcoreThreshold = 400.0;
-    }
-
-    if (totalExpChange >= hardcoreThreshold) {
-        const hardcorePool = [
-            `Lv.${level}의 살인적인 경험치 통을 상대로 7일간 무려 +${totalExpChange.toFixed(3)}%를 밀어버리신 것 같아요! 의자에서 엉덩이를 뗄 줄 모르는 진정한 시간빌게이츠 / 홈프로텍터가 강림한 듯해요~`,
-            `상상 초월하는 광기의 사냥량을 보여주고 계세요! 고레벨 구간임에도 일주일 동안 경험치를 +${totalExpChange.toFixed(3)}% 폭발시키며 홈프로텍터이자 시간빌게이츠 타이틀을 거머쥔 것으로 판단되고 있어요.`,
-            `메이플 서버가 마르지 않도록 불태우고 계신 것 같아요. 7일간 누적 경험치 +${totalExpChange.toFixed(3)}%에 레벨 업까지 해내며 시간빌게이츠/홈프로텍터 인증 마크를 획득하신 듯해요!`
-        ];
-        return { statusType: "active", badgeText: "🔥 활발히 플레이 중!", tag: "👑 [시간빌게이츠 / 홈프로텍터]", desc: hardcorePool[Math.floor(Math.random() * hardcorePool.length)] };
-    } else {
-        const workerPool = [
-            `갓생과 메이플을 칼같이 겸비하신 성실한 회사원 유형인 것 같아요! 지난 7일간 일일 숙제를 빼먹지 않고 채워 경험치 +${totalExpChange.toFixed(3)}%를 적립하신 듯해요~`,
-            `직장인의 귀감 같은 플레이 패턴을 보여주고 계세요. 바쁜 와중에도 틈틈이 접속해 7일간 +${totalExpChange.toFixed(3)}%를 올리며 모범적인 성실한 회사원의 진수를 뿜어내는 중인 것 같아요.`,
-            `무리하지 않고 스케줄에 맞춰 영리하게 육성 중이신 듯해요. 일주일간 경험치 +${totalExpChange.toFixed(3)}% 상승으로 성실한 회사원 감성을 잔뜩 보여주고 계신 것 같아요!`
-        ];
-        return { statusType: "active", badgeText: "🔥 활발히 플레이 중!", tag: "☕ [성실한 회사원 타입]", desc: workerPool[Math.floor(Math.random() * workerPool.length)] };
-    }
+    return { 
+        statusType: "monthly", 
+        badgeText: "💤 월간 방문객", 
+        tag: "💤 [한 달에 한 번 문안 인사 드리는 귀환러]", 
+        desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 발자취가 남았어요! 달력에 동그라미를 치고 한 달에 딱 한 번 생존 신고 겸 문안 인사 올리는 전설의 귀환러 유저분이세요~` 
+    };
 }
 
 async function addOrUpdateCharacter(targetName = null) {
@@ -706,7 +904,28 @@ function renderSavedCards() {
         });
 
         let badgeClass = 'badge-active';
-        if (char.statusType === 'boss') badgeClass = 'badge-boss';
+        if (char.statusType === 'psycho') badgeClass = 'badge-psycho';
+        else if (char.statusType === 'hardcore') badgeClass = 'badge-hardcore';
+        else if (char.statusType === 'step90') badgeClass = 'badge-step90';
+        else if (char.statusType === 'step85') badgeClass = 'badge-step85';
+        else if (char.statusType === 'step80') badgeClass = 'badge-step80';
+        else if (char.statusType === 'step75') badgeClass = 'badge-step75';
+        else if (char.statusType === 'step70') badgeClass = 'badge-step70';
+        else if (char.statusType === 'step65') badgeClass = 'badge-step65';
+        else if (char.statusType === 'step60') badgeClass = 'badge-step60';
+        else if (char.statusType === 'step55') badgeClass = 'badge-step55';
+        else if (char.statusType === 'step50') badgeClass = 'badge-step50';
+        else if (char.statusType === 'step45') badgeClass = 'badge-step45';
+        else if (char.statusType === 'step40') badgeClass = 'badge-step40';
+        else if (char.statusType === 'step35') badgeClass = 'badge-step35';
+        else if (char.statusType === 'step30') badgeClass = 'badge-step30';
+        else if (char.statusType === 'step25') badgeClass = 'badge-step25';
+        else if (char.statusType === 'step20') badgeClass = 'badge-step20';
+        else if (char.statusType === 'step15') badgeClass = 'badge-step15';
+        else if (char.statusType === 'step10') badgeClass = 'badge-step10';
+        else if (char.statusType === 'step5') badgeClass = 'badge-step5';
+        else if (char.statusType === 'monthly') badgeClass = 'badge-monthly';
+        else if (char.statusType === 'boss') badgeClass = 'badge-boss';
         else if (char.statusType === 'inactive') badgeClass = 'badge-inactive';
 
         return `
