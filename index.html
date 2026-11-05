@@ -562,7 +562,7 @@ function generateUniqueDiagnosis(level, lvlDiff, totalExpChange, isMax, isBossSp
         hardcoreThreshold = 400.0;
     }
 
-    if (totalExpChange >= hardcoreThreshold || lvlDiff > 0) {
+    if (totalExpChange >= hardcoreThreshold) {
         const hardcorePool = [
             `Lv.${level}의 살인적인 경험치 통을 상대로 7일간 무려 +${totalExpChange.toFixed(3)}%를 밀어버리신 것 같아요! 의자에서 엉덩이를 뗄 줄 모르는 진정한 시간빌게이츠 / 홈프로텍터가 강림한 듯해요~`,
             `상상 초월하는 광기의 사냥량을 보여주고 계세요! 고레벨 구간임에도 일주일 동안 경험치를 +${totalExpChange.toFixed(3)}% 폭발시키며 홈프로텍터이자 시간빌게이츠 타이틀을 거머쥔 것으로 판단되고 있어요.`,
