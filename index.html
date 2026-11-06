@@ -807,14 +807,14 @@ async function addOrUpdateCharacter(targetName = null) {
         if (!idData || !idData.ocid) throw new Error(`'${name}' 캐릭터를 찾을 수 없습니다.`);
         const ocid = idData.ocid;
 
-        const todayStr = getDateStr(1);
         const pastStr = getDateStr(7);
 
+        // 🛠️ date 파라미터를 아예 삭제하여 실시간 최신 데이터를 바로 불러오도록 수정 완료!
         const [todayData, pastData, unionData, equipmentData] = await Promise.all([
-            fetchApi(`https://open.api.nexon.com/maplestory/v1/character/basic?ocid=${ocid}&date=${todayStr}`),
+            fetchApi(`https://open.api.nexon.com/maplestory/v1/character/basic?ocid=${ocid}`),
             fetchApi(`https://open.api.nexon.com/maplestory/v1/character/basic?ocid=${ocid}&date=${pastStr}`),
-            fetchApi(`https://open.api.nexon.com/maplestory/v1/user/union?ocid=${ocid}&date=${todayStr}`),
-            fetchApi(`https://open.api.nexon.com/maplestory/v1/character/item-equipment?ocid=${ocid}&date=${todayStr}`)
+            fetchApi(`https://open.api.nexon.com/maplestory/v1/user/union?ocid=${ocid}`),
+            fetchApi(`https://open.api.nexon.com/maplestory/v1/character/item-equipment?ocid=${ocid}`)
         ]);
 
         if (!todayData) throw new Error('캐릭터 정보를 불러오지 못했습니다.');
