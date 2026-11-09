@@ -1,35 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta name="google-site-verification" content="j3B0Z9KoTmnRbMHq3N_KpFgCT4KBUPgtuObNeIbRS-Y" />     
-<meta name="naver-site-verification" content="358b16225f4c63d91f49a665c3d272a05d9aaea3" />
+    <meta name="google-site-verification" content="j3B0Z9KoTmnRbMHq3N_KpFgCT4KBUPgtuObNeIbRS-Y" />     
+    <meta name="naver-site-verification" content="358b16225f4c63d91f49a665c3d272a05d9aaea3" />
      
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6983109053543386"
-     crossorigin="anonymous"></script>
-    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6983109053543386" crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PD2NXJ2R"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-</script>
-   <meta charset="UTF-8">
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    </script>
+   
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- 💡 검색 노출(SEO) 최적화 태그 적용 -->
-    <title>메이플 모니터 (메니터) | 메이플스토리 캐릭터 활동성 및 달력형 자산 스케줄러</title>
-    <meta name="description" content="메이플 모니터(메니터) - 메이플스토리 캐릭터 활동성 모니터링, 7일 누적 경험치 추적, 달력형 아이템 및 메소 자산 기록 스케줄러 서비스">
-    <meta name="keywords" content="메이플 모니터, 메니터, 메이플스토리 모니터, 메이플 캐릭터 활동, 메이플 활동성, 메이플 경험치 추적, 메이플 사냥량 분석, 메이플 달력 스케줄러, 메이플 자산관리, 메이플 메소 기록, 메이플 캐릭터 검색">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="메이플 모니터 (메니터) - 메이플스토리 캐릭터 활동 및 달력 자산 관리">
-    <meta property="og:description" content="캐릭터 활동 진단과 더불어 캘린더 달력 형식으로 아이템 획득 내역과 메소 자산 현황을 한눈에 기록하고 확인해보세요!">
-    <meta property="og:site_name" content="메이플 모니터">
+    <title>메이플 모니터 (메니터) | 메이플스토리 캐릭터 활동성, 경험치 추적, 자산 관리 및 보스 스케줄러</title>
+    <meta name="description" content="메이플 모니터(메니터) - 메이플스토리 캐릭터 활동성 모니터링, 7일 누적 경험치 추적, 달력형 아이템 및 메소 자산 기록, 보스 파티 일정 타임테이블 관리 통합 솔루션">
     <meta name="robots" content="index, follow">
 
     <style>
         :root {
             --bg-color: #0f172a;
             --card-bg: #1e293b;
+            --card-sub-bg: #111827;
             --accent-color: #38bdf8;
             --text-color: #f8fafc;
             --text-muted: #94a3b8;
@@ -38,7 +32,10 @@
             --boss-color: #ec4899;
             --inactive-color: #f59e0b;
             --link-gold: #fbbf24;
+            --input-bg: #0f172a;
+            --popup-bg: #1e293b;
         }
+
         body {
             font-family: 'Pretendard', sans-serif;
             background-color: var(--bg-color);
@@ -46,550 +43,227 @@
             margin: 0;
             padding: 30px 15px;
         }
-        .container { max-width: 950px; margin: 0 auto; }
+
+        .container { max-width: 1100px; margin: 0 auto; }
         
         .search-box {
-            background: var(--card-bg);
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            align-items: center;
+            background: var(--card-bg); padding: 16px; border-radius: 12px; border: 1px solid var(--border-color);
+            display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; align-items: center;
         }
         input, select {
             padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);
-            background: #0f172a; color: white; font-size: 15px;
+            background: #0f172a; color: white; font-size: 15px; outline: none;
         }
+        input[type="time"] { color-scheme: dark; }
+        input:focus, select:focus { border-color: var(--accent-color); }
         input { flex: 1; min-width: 160px; }
         select { cursor: pointer; min-width: 130px; }
         
         button {
             padding: 12px 20px; background: var(--accent-color); color: #0f172a;
-            font-weight: bold; border: none; border-radius: 8px; cursor: pointer;
+            font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: opacity 0.2s;
         }
         button:hover { opacity: 0.9; }
 
-        .btn-create-group {
-            background: #10b981;
-            color: #0f172a;
-        }
+        .btn-create-group { background: #10b981; color: #0f172a; }
+        .btn-refresh-all { background: #8b5cf6; color: white; font-size: 13px; padding: 8px 14px; white-space: nowrap; }
+        .btn-refresh-all:disabled { background: #475569 !important; color: #94a3b8 !important; cursor: not-allowed; opacity: 0.7; }
 
-        .btn-refresh-all {
-            background: #8b5cf6;
-            color: white;
-            font-size: 13px;
-            padding: 8px 14px;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-        }
-        .btn-refresh-all:hover:not(:disabled) { background: #7c3aed; }
-        .btn-refresh-all:disabled {
-            background: #475569;
-            color: #94a3b8;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
+        .top-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 10px; }
 
-        .top-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-
-        /* 메인 네비게이션 탭 스타일 */
         .main-nav-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 12px;
+            display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 12px; flex-wrap: wrap;
         }
         .main-tab-btn {
-            padding: 10px 22px;
-            border-radius: 8px;
-            background: var(--card-bg);
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: bold;
+            padding: 10px 22px; border-radius: 8px; background: var(--card-bg); color: var(--text-muted);
+            border: 1px solid var(--border-color); cursor: pointer; font-size: 15px; font-weight: bold;
         }
-        .main-tab-btn.active {
-            background: var(--accent-color);
-            color: #0f172a;
-            border-color: var(--accent-color);
-        }
+        .main-tab-btn.active { background: var(--accent-color); color: #0f172a; border-color: var(--accent-color); }
 
-        .group-tabs {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 5px;
-            flex: 1;
-        }
+        .group-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; flex: 1; }
         .tab-btn {
-            padding: 8px 18px;
-            border-radius: 20px;
-            background: #1e293b;
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            white-space: nowrap;
+            padding: 8px 18px; border-radius: 20px; background: #1e293b; color: var(--text-muted);
+            border: 1px solid var(--border-color); cursor: pointer; font-size: 14px; font-weight: bold; white-space: nowrap;
         }
-        .tab-btn.active {
-            background: var(--accent-color);
-            color: #0f172a;
-            border-color: var(--accent-color);
-        }
+        .tab-btn.active { background: var(--accent-color); color: #0f172a; border-color: var(--accent-color); }
 
-        .info-guide-box {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-left: 4px solid var(--accent-color);
-            border-radius: 8px;
-            padding: 12px 16px;
-            margin-bottom: 20px;
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* 사용법 접이식 탭 스타일 */
-        .guide-toggle-box {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        .guide-toggle-btn {
-            width: 100%;
-            background: #1e293b;
-            border: none;
-            outline: none;
-            padding: 12px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            font-weight: bold;
-            color: #f59e0b;
-            cursor: pointer;
-            text-align: left;
-        }
-        .guide-toggle-btn:hover { background: rgba(255,255,255,0.03); }
-        .guide-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-            padding: 0 16px;
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.7;
-            background: #0f172a;
-        }
-        .guide-content.open {
-            max-height: 800px;
-            padding: 14px 16px;
-            border-top: 1px solid #334155;
-        }
-
-        .criteria-toggle-wrap {
-            margin-top: 10px;
-            border-top: 1px dashed rgba(255, 255, 255, 0.15);
-            padding-top: 8px;
-        }
-        .criteria-btn {
-            width: 100%;
-            background: transparent;
-            border: none;
-            outline: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9em;
-            font-weight: 600;
-            color: var(--accent-color);
-            cursor: pointer;
-            padding: 4px 2px;
-        }
-        .criteria-btn:hover { opacity: 0.8; }
-        .criteria-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-            font-size: 0.85em;
-            color: var(--text-muted);
-            background: rgba(15, 23, 42, 0.4);
-            border-radius: 6px;
-            padding: 0 10px;
-        }
-        .criteria-content.open {
-            max-height: 1400px;
-            padding: 10px;
-            margin-top: 6px;
-        }
-        .criteria-desc { margin-bottom: 6px; color: var(--text-color); }
-        .criteria-list { margin: 0; padding-left: 18px; line-height: 1.6; }
-        .criteria-list li { margin-bottom: 4px; }
-        .criteria-sub {
-            margin-top: 10px;
-            font-size: 0.9em;
-            color: #cbd5e1;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 6px;
-        }
-
-        /* 📦 달력형 자산 스케줄러 스타일 */
         .asset-tab-pane { display: none; }
         .asset-tab-pane.active { display: block; }
         
         .asset-section-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
+            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; margin-bottom: 20px;
         }
 
         /* 캘린더 스타일 */
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .calendar-header button {
-            background: #334155;
-            color: white;
-            padding: 6px 14px;
-            font-size: 14px;
-            border-radius: 6px;
-        }
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 6px;
-        }
-        .calendar-day-name {
-            text-align: center;
-            font-weight: bold;
-            font-size: 13px;
-            color: var(--text-muted);
-            padding: 6px 0;
-        }
+        .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 18px; font-weight: bold; }
+        .calendar-header button { background: #334155; color: white; padding: 6px 14px; font-size: 14px; border-radius: 6px; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+        .calendar-day-name { text-align: center; font-weight: bold; font-size: 13px; color: var(--text-muted); padding: 6px 0; }
         .calendar-cell {
-            background: #0f172a;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            min-height: 110px;
-            padding: 6px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-            position: relative;
+            background: #0f172a; border: 1px solid var(--border-color); border-radius: 8px; min-height: 110px; padding: 6px;
+            display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; position: relative;
         }
-        .calendar-cell.empty {
-            background: rgba(15, 23, 42, 0.3);
-            border-color: transparent;
-            cursor: default;
-        }
-        .calendar-cell:hover:not(.empty) {
-            border-color: var(--accent-color);
-        }
-        .calendar-cell.selected {
-            border: 2px solid var(--accent-color);
-            background: #172554;
-        }
-        /* 오늘 날짜 강조 테두리 */
-        .calendar-cell.today-cell {
-            border: 2px solid #f59e0b;
-        }
-        .cell-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .cell-date {
-            font-size: 12px;
-            font-weight: bold;
-            color: var(--text-muted);
-        }
-        .today-badge-text {
-            font-size: 9px;
-            background: #f59e0b;
-            color: #0f172a;
-            padding: 1px 4px;
-            border-radius: 3px;
-            font-weight: bold;
-        }
+        .calendar-cell.empty { background: rgba(15, 23, 42, 0.3); border-color: transparent; cursor: default; }
+        .calendar-cell.today-cell { border: 2px solid #f59e0b; }
+        .cell-header { display: flex; justify-content: space-between; align-items: center; }
+        .cell-date { font-size: 12px; font-weight: bold; color: var(--text-muted); }
+        .today-badge-text { font-size: 9px; background: #f59e0b; color: #0f172a; padding: 1px 4px; border-radius: 3px; font-weight: bold; }
         
-        .cell-content {
-            font-size: 11px;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            margin-top: 4px;
-            overflow: hidden;
-        }
-        
+        .cell-content { font-size: 11px; display: flex; flex-direction: column; gap: 2px; margin-top: 4px; overflow: hidden; }
         .cell-badge {
-            padding: 2px 4px;
-            border-radius: 4px;
-            font-size: 10px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-weight: 500;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 2px 4px; border-radius: 4px; font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500;
+            display: flex; justify-content: space-between; align-items: center;
         }
-        .cell-badge button {
-            background: transparent;
-            border: none;
-            color: inherit;
-            font-size: 9px;
-            cursor: pointer;
-            padding: 0;
-            margin-left: 3px;
-            opacity: 0.7;
-        }
-        .cell-badge button:hover { opacity: 1; }
+        .cell-badge button { background: transparent; border: none; color: inherit; font-size: 9px; cursor: pointer; padding: 0; margin-left: 3px; opacity: 0.7; }
 
-        /* 📌 날짜 클릭 시 해당 날짜 바로 옆/근처에 뜨는 스마트 플로팅 팝업 */
         .day-popup-box {
-            position: absolute;
-            background: #0f172a;
-            border: 2px solid var(--accent-color);
-            border-radius: 10px;
-            padding: 14px;
-            width: 280px;
-            z-index: 100;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
-            display: none;
+            position: absolute; background: #0f172a; border: 2px solid var(--accent-color); border-radius: 10px; padding: 14px; width: 280px; z-index: 100;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7); display: none;
         }
-        .day-popup-box.active {
-            display: block;
-        }
-        .popup-header {
-            font-size: 13px;
-            font-weight: bold;
-            color: var(--accent-color);
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .popup-chips {
-            display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
-            margin-bottom: 8px;
-        }
-        .popup-chip {
-            background: #334155;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-        }
-        .popup-chip:hover { background: var(--accent-color); color: #0f172a; }
+        .day-popup-box.active { display: block; }
+        .popup-header { font-size: 13px; font-weight: bold; color: var(--accent-color); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .popup-chips { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
+        .popup-chip { background: #334155; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; border: none; cursor: pointer; }
+        .popup-form { display: flex; flex-direction: column; gap: 6px; }
+        .popup-form input { padding: 8px; font-size: 13px; background: #1e293b; }
 
-        .popup-form {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
+        .stats-summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 20px; }
+        .stat-card { background: #0f172a; border: 1px solid var(--border-color); border-radius: 8px; padding: 14px; }
+        .stat-card-title { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+
+        /* ⚔️ 보스 파티 타임라인 스타일 */
+        .timetable-panel { background: var(--card-sub-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; }
+        .timetable-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        .week-nav-controls { display: flex; align-items: center; gap: 6px; }
+        .week-nav-controls button { background: #334155; color: white; padding: 6px 12px; font-size: 12px; border-radius: 6px; }
+        
+        .timetable-days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; align-items: stretch; }
+        @media (max-width: 900px) {
+            .timetable-days-grid { grid-template-columns: 1fr; }
         }
-        .popup-form input {
-            padding: 8px;
-            font-size: 13px;
-            background: #1e293b;
+        .day-column {
+            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;
+        }
+        .day-column-header {
+            background: #0f172a; border-bottom: 1px solid var(--border-color); padding: 10px 8px;
+            display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: bold; color: var(--text-muted); flex-shrink: 0;
+        }
+        .day-column.today .day-column-header { background: rgba(56, 189, 248, 0.2); color: var(--accent-color); border-bottom-color: var(--accent-color); }
+        .day-column-header button {
+            background: var(--accent-color); color: #0f172a; font-size: 10px; padding: 3px 6px; border-radius: 4px; font-weight: bold; cursor: pointer; border: none;
         }
 
-        /* 하단 통계 요약 카드 */
-        .stats-summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 12px;
-            margin-top: 20px;
-        }
-        .stat-card {
-            background: #0f172a;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 14px;
-        }
-        .stat-card-title {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-        }
+        .day-timeline-body { padding: 8px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
 
-        #cardContainer {
+        .timeline-slot-row {
+            height: 48px;
+            min-height: 48px;
+            max-height: 48px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            justify-content: center;
         }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            position: relative;
-        }
-
-        .btn-delete-top {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 6px 12px;
+        .timeline-empty-slot {
+            height: 100%;
+            border: 1px dashed rgba(255,255,255,0.03);
             border-radius: 6px;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
         }
-        .btn-delete-top:hover { background: #dc2626; }
 
-        .profile-header {
-            display: flex; align-items: center; gap: 20px;
-            padding-right: 60px;
+        .timetable-event-card {
+            background: #0f172a; border-radius: 8px; padding: 7px 9px; font-size: 11px; height: 42px; box-sizing: border-box;
+            border-left: 5px solid var(--accent-color); border-top: 1px solid rgba(255,255,255,0.1);
+            border-right: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3); cursor: grab; transition: transform 0.1s, filter 0.15s; flex-shrink: 0;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; position: relative;
         }
+        .timetable-event-card:active { cursor: grabbing; }
+        .timetable-event-card:hover { transform: translateY(-1px); filter: brightness(1.15); }
+        .timetable-event-card.selected { border: 2px solid var(--accent-color); background: #172554; }
         
+        /* ⏰ 시간이 지나면 자동으로 회색 처리 (드래그해서 옮기면 원래 색상으로 부활) */
+        .timetable-event-card.past-boss {
+            opacity: 0.35;
+            filter: grayscale(100%);
+            border-left-color: #64748b !important;
+        }
+
+        .timetable-bottom-details {
+            margin-top: 15px;
+            background: #0b1120;
+            border: 1px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 13px;
+            color: var(--text-color);
+            display: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .timetable-bottom-details.active { display: block; }
+
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6);
+            display: flex; justify-content: center; align-items: center; z-index: 9999; display: none;
+        }
+        .modal-overlay.active { display: flex; }
+        .schedule-modal-box {
+            background: var(--popup-bg); border: 2px solid var(--accent-color); border-radius: 16px; padding: 22px; width: 340px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8); display: flex; flex-direction: column; gap: 10px;
+        }
+
+        .quick-chips-box { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; align-items: center; }
+        .quick-chip-item {
+            background: #334155; color: white; font-size: 11px; padding: 3px 8px; border-radius: 6px; cursor: pointer; border: none; font-weight: 500;
+            display: inline-flex; align-items: center; gap: 4px;
+        }
+        .quick-chip-item:hover { background: var(--accent-color); color: #0f172a; }
+        .quick-chip-delete { font-size: 9px; opacity: 0.7; border-radius: 50%; padding: 0 3px; }
+        .quick-chip-delete:hover { opacity: 1; background: #ef4444; color: white; }
+
+        #cardContainer { display: flex; flex-direction: column; gap: 15px; }
+        .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; position: relative; }
+        .btn-delete-top {
+            position: absolute; top: 20px; right: 20px; background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer;
+        }
+        .profile-header { display: flex; align-items: center; gap: 20px; padding-right: 60px; }
         .char-img { 
-            width: 130px; 
-            height: 130px; 
-            background: linear-gradient(135deg, #0f172a, #334155); 
-            border: 2px solid var(--border-color);
-            border-radius: 12px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            flex-shrink: 0; 
-            overflow: hidden;
+            width: 130px; height: 130px; background: linear-gradient(135deg, #0f172a, #334155); 
+            border: 2px solid var(--border-color); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden;
         }
-        .char-img img { 
-            width: 140%; 
-            height: 140%; 
-            object-fit: contain; 
-            transform: scale(1.4);
-        }
-        
-        .badge {
-            display: inline-block; padding: 5px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 6px;
-        }
+        .char-img img { width: 140%; height: 140%; object-fit: contain; transform: scale(1.4); }
+        .badge { display: inline-block; padding: 5px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 6px; }
 
-        .badge-psycho { background: rgba(239, 68, 68, 0.25); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); } 
-        .badge-hardcore { background: rgba(245, 158, 11, 0.25); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); } 
-        .badge-step90 { background: rgba(234, 179, 8, 0.2); color: #facc15; }   
+        .badge-psycho { background: rgba(239, 68, 68, 0.25); color: #f87171; } 
+        .badge-hardcore { background: rgba(245, 158, 11, 0.25); color: #fbbf24; } 
         .badge-step85 { background: rgba(168, 85, 247, 0.2); color: #c084fc; }  
-        .badge-step80 { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }   
         .badge-step75 { background: rgba(14, 165, 233, 0.2); color: #38bdf8; }   
-        .badge-step70 { background: rgba(20, 184, 166, 0.2); color: #2dd4bf; }   
         .badge-step65 { background: rgba(16, 185, 129, 0.2); color: #34d399; }   
-        .badge-step60 { background: rgba(132, 204, 22, 0.2); color: #a3e635; }   
-        .badge-step55 { background: rgba(250, 204, 21, 0.2); color: #fde047; }   
         .badge-step50 { background: rgba(251, 146, 60, 0.2); color: #fdba74; }   
-        .badge-step45 { background: rgba(248, 113, 113, 0.2); color: #fca5a5; }  
-        .badge-step40 { background: rgba(244, 63, 94, 0.2); color: #fb7185; }    
         .badge-step35 { background: rgba(236, 72, 153, 0.2); color: #f472b6; }   
         .badge-step30 { background: rgba(217, 70, 239, 0.2); color: #e879f9; }   
-        .badge-step25 { background: rgba(168, 85, 247, 0.2); color: #d8b4fe; }  
-        .badge-step20 { background: rgba(129, 140, 248, 0.2); color: #a5b4fc; }  
-        .badge-step15 { background: rgba(96, 165, 250, 0.2); color: #93c5fd; }   
-        .badge-step10 { background: rgba(56, 189, 248, 0.2); color: #7dd3fc; }   
-        .badge-step5 { background: rgba(45, 212, 191, 0.2); color: #5eead4; }     
         .badge-monthly { background: rgba(148, 163, 184, 0.2); color: #94a3b8; }
         .badge-boss { background: rgba(236, 72, 153, 0.2); color: #ec4899; }
         .badge-inactive { background: rgba(100, 116, 139, 0.25); color: #64748b; }
 
         .group-select-inline {
-            background: #0284c7;
-            color: white;
-            border: none;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: bold;
-            margin-left: 6px;
-            cursor: pointer;
+            background: #0284c7; color: white; border: none; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; margin-left: 6px; cursor: pointer;
         }
-
         .summary-box {
-            margin-top: 15px; 
-            background: #111827; 
-            padding: 12px 14px; 
-            border-radius: 8px; 
-            font-size: 13px; 
-            color: var(--text-muted); 
-            line-height: 1.5;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
+            margin-top: 15px; background: #111827; padding: 12px 14px; border-radius: 8px; font-size: 13px; color: var(--text-muted); line-height: 1.5;
+            display: flex; flex-direction: column; gap: 6px;
         }
         .category-tag {
-            display: inline-block;
-            background: #334155;
-            color: #38bdf8;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 11px;
-            margin-bottom: 4px;
+            display: inline-block; background: #334155; color: #38bdf8; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 11px; margin-bottom: 4px;
         }
         .summary-footer {
-            display: flex;
-            justify-content: space-between;
-            font-size: 11px;
-            color: #64748b;
-            border-top: 1px solid #1e293b;
-            padding-top: 6px;
-            margin-top: 2px;
+            display: flex; justify-content: space-between; font-size: 11px; color: #64748b; border-top: 1px solid #1e293b; padding-top: 6px; margin-top: 2px;
         }
-
         #loading { display: none; text-align: center; color: var(--accent-color); font-weight: bold; padding: 15px; }
-
         footer {
-            margin-top: 60px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.8;
+            margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border-color); text-align: center; font-size: 13px; color: var(--text-muted); line-height: 1.8;
         }
-        footer a {
-            color: var(--link-gold);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-        .footer-links {
-            margin-top: 6px;
-        }
-        .footer-links span {
-            margin: 0 4px;
-            color: #64748b;
-        }
+        footer a { color: var(--link-gold); text-decoration: none; font-weight: 500; }
+        .footer-links { margin-top: 6px; }
+        .footer-links span { margin: 0 4px; color: #64748b; }
     </style>
 </head>
 <body>
@@ -597,89 +271,24 @@
 <div class="container" id="mainContainer">
     <h2>👥 메이플스토리 캐릭터 활동 모니터</h2>
     
-    <!-- 메인 네비게이션 탭 -->
     <div class="main-nav-tabs">
         <button class="main-tab-btn active" id="navBtnMonitor" onclick="switchMainTab('monitor')">👥 캐릭터 활동 모니터</button>
         <button class="main-tab-btn" id="navBtnAsset" onclick="switchMainTab('asset')">📅 달력형 자산·아이템 스케줄러</button>
+        <button class="main-tab-btn" id="navBtnBoss" onclick="switchMainTab('boss')">⚔️ 보스 파티 스케줄</button>
     </div>
 
     <!-- 1️⃣ [캐릭터 활동 모니터] 화면 탭 -->
     <div class="asset-tab-pane active" id="paneMonitor">
         <div class="search-box">
             <input type="text" id="charName" placeholder="캐릭터 닉네임 입력" onkeypress="if(event.key==='Enter') addOrUpdateCharacter()">
-            
-            <select id="groupSelect">
-                <!-- 동적 생성 -->
-            </select>
-
+            <select id="groupSelect"></select>
             <button class="btn-create-group" onclick="createNewGroup()">+ 그룹 생성</button>
             <button onclick="addOrUpdateCharacter()">캐릭터 추가</button>
         </div>
 
         <div class="top-controls">
-            <div class="group-tabs" id="groupTabs">
-                <!-- 탭 동적 생성 -->
-            </div>
+            <div class="group-tabs" id="groupTabs"></div>
             <button class="btn-refresh-all" id="btnRefreshAll" onclick="manualRefreshAllCharacters()">🔄 전체 갱신</button>
-        </div>
-
-        <div class="info-guide-box" id="guideBox">
-            📌 <b>활동 상태 진단 안내:</b> 7일간 경험치 변동량과 장비 스펙을 분석합니다. (250 레벨 미만 분석 불가)<br>
-            ⏱️ <b>자동 갱신 안내:</b> 등록된 모든 캐릭터는 <b>매일 오전/오후 12시 정각에 백그라운드에서 자동 갱신</b>됩니다. 우측의 [🔄 전체 갱신] 버튼으로 언제든 직접 갱신할 수도 있습니다.
-            
-            <div class="criteria-toggle-wrap">
-                <button type="button" class="criteria-btn" onclick="toggleCriteria()">
-                    <span>📊 5% 단위 창의적 진단 기준 상세보기 (전체 내용 보기)</span>
-                    <span id="toggleArrow">▼</span>
-                </button>
-                <div class="criteria-content" id="criteriaContent">
-                    <div class="criteria-desc">
-                        레벨별 하드코어 기준치를 100%로 두고, <b>5% 구간마다 캐릭터의 1주일간 실제 경험치 상승량과 플레이 성향</b>을 풍성한 위트와 창의적인 칭호로 진단합니다!
-                    </div>
-                    <div class="criteria-desc" style="margin-top: 8px;">
-                        <b>📌 레벨별 1주일 기준치 (100% 기준) 안내:</b>
-                    </div>
-                    <ul class="criteria-list">
-                        <li><b>Lv. 295 이상:</b> 1주일 10% 이상 상승</li>
-                        <li><b>Lv. 290 ~ 294:</b> 1주일 20% 이상 상승</li>
-                        <li><b>Lv. 285 ~ 289:</b> 1주일 50% 이상 상승</li>
-                        <li><b>Lv. 280 ~ 284:</b> 1주일 100% 이상 상승</li>
-                        <li><b>Lv. 275 ~ 279:</b> 1주일 250% 이상 상승</li>
-                        <li><b>Lv. 270 ~ 274:</b> 1주일 400% 이상 상승</li>
-                        <li><b>기타 (270 미만):</b> 1주일 700% 이상 상승</li>
-                    </ul>
-                    <div class="criteria-desc" style="margin-top: 10px;">
-                        <b>✨ 5% 단위 세부 분류 및 창의적 칭호 안내:</b>
-                    </div>
-                    <ul class="criteria-list">
-                        <li>👑 <b>영혼의 홈프로텍터 (150%+):</b> 기준치 대비 150% 이상 폭발적 상승 (현실을 잊은 광기의 사냥러)</li>
-                        <li>⚡ <b>심연의 사냥광 (100% ~ 150%):</b> 기준치 대비 100% 이상 달성 (의자 방석이 녹아버린 진성 사냥광)</li>
-                        <li>🏆 <b>월드 클래스 (95% ~ 100%):</b> 기준치 대비 95% 이상 달성 (완주를 목전에 둔 랭커)</li>
-                        <li>🌟 <b>숨은 메카니크 (90% ~ 95%):</b> 기준치 대비 90% 이상 달성 (동선을 꿰뚫는 고수)</li>
-                        <li>💎 <b>철인 마라토너 (85% ~ 90%):</b> 기준치 대비 85% 이상 달성 (지치지 않는 지구력)</li>
-                        <li>🏅 <b>상위권 우등생 (80% ~ 85%):</b> 기준치 대비 80% 이상 달성 (숙제와 사냥을 잡는 우등생)</li>
-                        <li>🎖️ <b>칼각 잡힌 모범생 (75% ~ 80%):</b> 기준치 대비 75% 이상 달성 (철저한 스케줄러)</li>
-                        <li>🎯 <b>황금 페이스 메이커 (70% ~ 75%):</b> 기준치 대비 70% 이상 달성 (이상적인 리듬)</li>
-                        <li>🔥 <b>불타는 열정맨 (65% ~ 70%):</b> 기준치 대비 65% 이상 달성 (사냥터를 지지는 열정)</li>
-                        <li>💪 <b>근성의 퀘스트 장인 (60% ~ 65%):</b> 기준치 대비 60% 이상 달성 (내실을 다지는 장인)</li>
-                        <li>💼 <b>메이플 주식회사 과장 (55% ~ 60%):</b> 기준치 대비 55% 이상 달성 (출근 도장 찍는 과장님)</li>
-                        <li>💼 <b>갓생과 메생의 반반 (50% ~ 55%):</b> 기준치 대비 50% 이상 달성 (현실과 게임의 반반 능력자)</li>
-                        <li>🚶‍♂️ <b>느긋한 산책러 (45% ~ 50%):</b> 기준치 대비 45% 이상 달성 (콧바람 쐬는 산책러)</li>
-                        <li>🚶‍♂️ <b>마을 마실러 (40% ~ 45%):</b> 기준치 대비 40% 이상 달성 (사냥터보다 마을이 편한 유저)</li>
-                        <li>☕ <b>주말의 연금술사 (35% ~ 40%):</b> 기준치 대비 35% 이상 달성 (주말에 에너지를 폭발시키는 타입)</li>
-                        <li>☕ <b>여유로운 찻잔러 (30% ~ 35%):</b> 기준치 대비 30% 이상 달성 (따뜻한 차 한잔의 힐링)</li>
-                        <li>🛋️ <b>로비의 터대주주 (25% ~ 30%):</b> 기준치 대비 25% 이상 달성 (코디와 친목에 올인한 유지)</li>
-                        <li>🛋️ <b>메인 화면 감상러 (20% ~ 25%):</b> 기준치 대비 20% 이상 달성 (브금과 캐릭터 얼굴 감상러)</li>
-                        <li>🍃 <b>바람 같은 나그네 (15% ~ 20%):</b> 기준치 대비 15% 이상 달성 (공기만 쐬고 떠나는 나그네)</li>
-                        <li>🍃 <b>가끔 찾는 별장 주인 (10% ~ 15%):</b> 기준치 대비 10% 이상 달성 (한 주에 한두 번 문 여는 별장)</li>
-                        <li>🌱 <b>새싹 발자국 (5% ~ 10%):</b> 기준치 대비 5% 이상 달성 (모래성에 남긴 소중한 첫 발자국)</li>
-                        <li>💤 <b>월간 방문객 (0% ~ 5% 미만):</b> 5% 미만 상승 (한 달에 한 번 문안 인사 드리는 귀환러)</li>
-                    </ul>
-                    <div class="criteria-sub">
-                        * 장비 스펙(스타포스 합산 100 이상 또는 장비 10개 이상 착용)이 일정 수준 이상이면서 경험치 상승량이 0%인 경우 사냥을 유기한 <b>'보스돌이'</b>로 판명됩니다.
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div id="loading">캐릭터 데이터를 분석하여 진단 문장을 생성하는 중...</div>
@@ -689,32 +298,12 @@
     <!-- 2️⃣ [달력형 자산·아이템 스케줄러] 화면 탭 -->
     <div class="asset-tab-pane" id="paneAsset">
         <div class="asset-section-card">
-            
-            <!-- 📖 깔끔하게 접고 펼칠 수 있는 사용법 및 주의사항 탭 -->
-            <div class="guide-toggle-box">
-                <button type="button" class="guide-toggle-btn" onclick="toggleGuideBox()">
-                    <span>📖 <b>[메이플 자산 스케줄러 사용법 및 데이터 보존 안내 (클릭하여 열기/닫기)]</b></span>
-                    <span id="guideToggleArrow">▼</span>
-                </button>
-                <div class="guide-content" id="guideContentBody">
-                    <ul style="margin: 0; padding-left: 18px;">
-                        <li><b>🎯 등록 및 사용법:</b> 달력 날짜를 클릭하면 <u>바로 옆에 입력 팝업</u>이 뜹니다. 수량 칸을 클릭하면 기본값 '1'이 자동 선택되어 바로 원하는 숫자를 입력할 수 있고, <b>엔터(Enter)</b>를 치면 바로 등록됩니다! 한 번 입력한 아이템 이름은 상단 칩 버튼으로 자동 기억되어 다음부터는 딸깍 누르고 수량만 적으면 끝납니다.</li>
-                        <li><b>✨ 오늘 날짜:</b> 달력에서 주황색 테두리와 <b>[오늘]</b> 마크가 표시된 칸이 오늘 날짜입니다.</li>
-                        <li><b>💾 데이터 저장 방식 (중요):</b> 서버 저장 방식이 아니라, 내 브라우저 안의 <b>로컬 스토리지(LocalStorage)</b>에 저장됩니다. 로그인 필요 없이 완벽히 프라이버시가 보호됩니다.</li>
-                        <li><b>🌐 IP 및 인터넷 선 변경 시:</b> 이사 등으로 인터넷 통신사나 공유기, 랜선이 바뀌어 <u>컴퓨터 IP가 변경되어도 데이터는 절대 안 날아가고 그대로 유지</u>됩니다!</li>
-                        <li><b>💻 포맷 또는 캐시 삭제 시:</b> 컴퓨터를 포맷하거나 브라우저 설정을 통해 <u>사이트 로컬 저장소 데이터를 직접 삭제/초기화하면 데이터가 지워집니다.</u></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 캘린더 상단 헤더 -->
             <div class="calendar-header">
                 <button onclick="changeMonth(-1)">◀ 이전 달</button>
                 <span id="calendarTitle">2026년 6월</span>
                 <button onclick="changeMonth(1)">다음 달 ▶</button>
             </div>
 
-            <!-- 요일 표시 -->
             <div class="calendar-grid" style="margin-bottom: 6px;">
                 <div class="calendar-day-name" style="color:#f87171;">일</div>
                 <div class="calendar-day-name">월</div>
@@ -725,14 +314,89 @@
                 <div class="calendar-day-name" style="color:#60a5fa;">토</div>
             </div>
 
-            <!-- 달력 날짜 격자 셀 (플로팅 팝업 포함) -->
-            <div class="calendar-grid" id="calendarDaysGrid" style="position: relative;">
-                <!-- 동적 렌더링 -->
+            <div class="calendar-grid" id="calendarDaysGrid" style="position: relative;"></div>
+            <div class="stats-summary-grid" id="statsSummaryGrid"></div>
+        </div>
+    </div>
+
+    <!-- 3️⃣ [보스 파티 스케줄] 화면 탭 -->
+    <div class="asset-tab-pane" id="paneBoss">
+        <div class="asset-section-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:15px;">
+                <div>
+                    <h3 style="margin: 0; color: var(--accent-color);">⚔️ 주간 보스 파티 타임라인</h3>
+                </div>
             </div>
 
-            <!-- 📊 하단 한 달 누적 통계 요약 영역 -->
-            <div class="stats-summary-grid" id="statsSummaryGrid">
-                <!-- 동적 렌더링 -->
+            <div class="timetable-panel">
+                <div class="timetable-header">
+                    <span style="font-weight:bold; font-size:14px;" id="currentWeekRangeLabel">📅 이번 주 타임라인</span>
+                    <div class="week-nav-controls">
+                        <button onclick="changeWeekOffset(-1)">◀ 이전 주</button>
+                        <button onclick="resetWeekOffset()">이번 주</button>
+                        <button onclick="changeWeekOffset(1)">다음 주 ▶</button>
+                    </div>
+                </div>
+
+                <!-- 월~일 요일표 그리드 -->
+                <div class="timetable-days-grid" id="timetableDaysGrid"></div>
+
+                <!-- 카드 클릭 시 하단에 고정으로 표시되는 상세 내용 패널 -->
+                <div class="timetable-bottom-details" id="timetableBottomDetails">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                        <span id="bottomDetailTitle" style="font-weight:bold; color:var(--accent-color); font-size:15px;">📌 보스 상세 정보</span>
+                        <button onclick="closeBottomDetails()" style="background:transparent; border:none; color:white; font-size:14px; cursor:pointer; padding:0;">✖ 닫기</button>
+                    </div>
+                    <div id="bottomDetailContent" style="display:flex; flex-direction:column; gap:4px; font-size:13px; margin-bottom:12px;"></div>
+                    <div style="display:flex; justify-content:flex-end; gap:6px;" id="bottomDetailButtons"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 중앙 모달 등록 팝업창 -->
+    <div class="modal-overlay" id="scheduleModalOverlay" onclick="closeScheduleModal()">
+        <div class="schedule-modal-box" onclick="event.stopPropagation()">
+            <div class="popup-header">
+                <span id="modalTitleText" style="font-size:15px;">➕ 보스 일정 추가</span>
+                <button onclick="closeScheduleModal()" style="background:transparent; border:none; color:white; font-size:16px; cursor:pointer;">✖</button>
+            </div>
+            <div class="popup-form">
+                <input type="hidden" id="modalTargetDay" value="1">
+                <input type="hidden" id="modalEditingId" value="">
+
+                <label style="font-size:11px; color:var(--text-muted);">보스 이름</label>
+                <input type="text" id="modalBossTitle" placeholder="예: 하드 칼로스">
+                <div class="quick-chips-box" id="modalBossChips"></div>
+
+                <label style="font-size:11px; color:var(--text-muted); margin-top:4px;">참여 캐릭터</label>
+                <div style="display:flex; gap:6px;">
+                    <input type="text" id="modalBossChar" placeholder="예: 캐릭A" style="flex:1;" oninput="syncModalColorWithChar(this.value)">
+                    <div style="display:flex; align-items:center; gap:4px; font-size:11px; color:var(--text-muted);">
+                        색상: <input type="color" id="modalCharColorPicker" value="#38bdf8" style="width:36px; height:36px; border:none; background:transparent; cursor:pointer;">
+                    </div>
+                </div>
+                <div class="quick-chips-box" id="modalCharChips"></div>
+
+                <label style="font-size:11px; color:var(--text-muted); margin-top:4px;">시작 시각 (30분 단위 선택)</label>
+                <input type="time" id="modalBossTime" value="21:00" step="1800" oninput="checkModalTimeConflict()">
+                <div id="modalConflictWarning" style="font-size:11px; color:#ef4444; font-weight:bold; display:none; margin-top:2px;">
+                    ⚠️ 선택하신 요일에 이미 등록된 일정과 시간이 겹칩니다!
+                </div>
+
+                <label style="font-size:11px; color:var(--text-muted); margin-top:4px;">반복 유형</label>
+                <select id="modalBossType">
+                    <option value="고정">🛡️ 매주 고정 파티</option>
+                    <option value="일회성">⚡ 이번 주만 일회성</option>
+                </select>
+
+                <label style="font-size:11px; color:var(--text-muted); margin-top:4px;">채널 (선택 사항)</label>
+                <input type="text" id="modalBossChannel" placeholder="예: 5 또는 자유 채널">
+
+                <label style="font-size:11px; color:var(--text-muted); margin-top:4px;">메모 / 파티원</label>
+                <input type="text" id="modalBossMemo" placeholder="예: 비숍 1명 지원">
+
+                <button onclick="submitModalSchedule()" style="background:#10b981; color:#0f172a; padding:10px; font-size:14px; margin-top:8px; font-weight:bold;">➕ 등록 완료</button>
             </div>
         </div>
     </div>
@@ -753,12 +417,12 @@
 <script>
 const API_KEY = "live_2172c694670af1863be767e315e2fc1921cb3d1edab4a8f86476ca000762ebdfefe8d04e6d233bd35cf2fabdeb93fb0d";
 let currentTab = '전체';
-
-// 달력 전역 변수
 let currentDate = new Date();
-let activePopupDate = null; // 현재 팝업이 열려있는 날짜 ("2026-06-06")
+let activePopupDate = null; 
+let weekOffset = 0; 
+let rememberedModalTime = "21:00"; 
+let selectedCardId = null;
 
-// 항목별 고유 색상 팔레트
 const colorPalette = [
     { bg: 'rgba(56, 189, 248, 0.25)', color: '#38bdf8' },
     { bg: 'rgba(16, 185, 129, 0.25)', color: '#34d399' },
@@ -770,92 +434,73 @@ const colorPalette = [
 
 function getItemColor(itemName) {
     let hash = 0;
-    for (let i = 0; i < itemName.length; i++) {
-        hash = itemName.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    const index = Math.abs(hash) % colorPalette.length;
-    return colorPalette[index];
+    for (let i = 0; i < itemName.length; i++) hash = itemName.charCodeAt(i) + ((hash << 5) - hash);
+    return colorPalette[Math.abs(hash) % colorPalette.length];
 }
 
-// 사용법 안내 탭 토글 함수
-function toggleGuideBox() {
-    const body = document.getElementById('guideContentBody');
-    const arrow = document.getElementById('guideToggleArrow');
-    body.classList.toggle('open');
-    if (body.classList.contains('open')) {
-        arrow.textContent = '▲';
+function getCharacterColors() {
+    return JSON.parse(localStorage.getItem('maple_char_colors_v9') || '{}');
+}
+
+function setCharacterColor(charName, colorHex) {
+    if (!charName) return;
+    let colors = getCharacterColors();
+    colors[charName.trim()] = colorHex;
+    localStorage.setItem('maple_char_colors_v9', JSON.stringify(colors));
+}
+
+const defaultCharColors = [
+    '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', 
+    '#06b6d4', '#6366f1', '#65a30d', '#f43f5e', '#a855f7',
+    '#e11d48', '#0284c7', '#16a34a', '#d97706', '#9333ea'
+];
+
+function getCharacterTheme(charName) {
+    if (!charName) return '#38bdf8';
+    let customColors = getCharacterColors();
+    if (customColors[charName.trim()]) return customColors[charName.trim()];
+    let hash = 0;
+    for (let i = 0; i < charName.length; i++) hash = charName.charCodeAt(i) + ((hash << 5) - hash);
+    return defaultCharColors[Math.abs(hash) % defaultCharColors.length];
+}
+
+function syncModalColorWithChar(charName) {
+    if (!charName) return;
+    let customColors = getCharacterColors();
+    if (customColors[charName.trim()]) {
+        document.getElementById('modalCharColorPicker').value = customColors[charName.trim()];
     } else {
-        arrow.textContent = '▼';
+        document.getElementById('modalCharColorPicker').value = getCharacterTheme(charName.trim());
     }
 }
 
-// 메인 네비게이션 탭 전환 함수
 function switchMainTab(tabName) {
     const btnMonitor = document.getElementById('navBtnMonitor');
     const btnAsset = document.getElementById('navBtnAsset');
+    const btnBoss = document.getElementById('navBtnBoss');
     const paneMonitor = document.getElementById('paneMonitor');
     const paneAsset = document.getElementById('paneAsset');
+    const paneBoss = document.getElementById('paneBoss');
+
+    btnMonitor.classList.remove('active');
+    btnAsset.classList.remove('active');
+    if(btnBoss) btnBoss.classList.remove('active');
+    paneMonitor.classList.remove('active');
+    paneAsset.classList.remove('active');
+    if(paneBoss) paneBoss.classList.remove('active');
 
     if (tabName === 'monitor') {
         btnMonitor.classList.add('active');
-        btnAsset.classList.remove('active');
         paneMonitor.classList.add('active');
-        paneAsset.classList.remove('active');
-    } else {
+    } else if (tabName === 'asset') {
         btnAsset.classList.add('active');
-        btnMonitor.classList.remove('active');
         paneAsset.classList.add('active');
-        paneMonitor.classList.remove('active');
         renderCalendar();
+    } else if (tabName === 'boss') {
+        if(btnBoss) btnBoss.classList.add('active');
+        if(paneBoss) paneBoss.classList.add('active');
+        renderBossDashboard();
     }
-}
-
-function toggleCriteria() {
-    const content = document.getElementById('criteriaContent');
-    const arrow = document.getElementById('toggleArrow');
-    
-    content.classList.toggle('open');
-    if (content.classList.contains('open')) {
-        arrow.textContent = '▲';
-    } else {
-        arrow.textContent = '▼';
-    }
-}
-
-// 다음 12시(00:00 또는 12:00 정각)까지 남은 ms 계산 함수
-function getMsUntilNext12OClock() {
-    const now = new Date();
-    const next = new Date(now);
-    const hours = now.getHours();
-
-    if (hours < 12) {
-        next.setHours(12, 0, 0, 0);
-    } else {
-        next.setHours(24, 0, 0, 0);
-    }
-    return next.getTime() - now.getTime();
-}
-
-function getNextFixedRefreshTime() {
-    const now = new Date();
-    const hours = now.getHours();
-    
-    const next = new Date(now);
-    if (hours < 12) {
-        next.setHours(12, 0, 0, 0);
-    } else {
-        next.setHours(24, 0, 0, 0);
-    }
-    return next.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-}
-
-// 12시 정각 자동 갱신 타이머 예약 함수
-function scheduleFixed12OClockRefresh() {
-    const msToNext = getMsUntilNext12OClock();
-    setTimeout(async () => {
-        await fetchAllCharactersData(false);
-        scheduleFixed12OClockRefresh(); // 다음 12시 스케줄 재등록
-    }, msToNext);
 }
 
 async function fetchApi(url) {
@@ -883,21 +528,385 @@ window.onload = function() {
     updateGroupDropdown();
     renderGroupTabs();
     renderSavedCards();
-
     renderCalendar();
-
-    // 12시 정각 자동 갱신 스케줄링 시작
-    scheduleFixed12OClockRefresh();
+    renderBossDashboard();
+    
+    // 💡 1분마다 시간 체크하여 지나간 보스 회색 자동 갱신
+    setInterval(() => {
+        if (document.getElementById('paneBoss').classList.contains('active')) {
+            renderBossDashboard();
+        }
+    }, 60000);
 };
 
-/* 📅 자산 스케줄러 로직 */
-function getCalendarRecords() {
-    return JSON.parse(localStorage.getItem('maple_calendar_records_v8') || '[]');
+/* ⚔️ 보스 파티 타임라인 데이터 관리 */
+function getBossSchedules() {
+    return JSON.parse(localStorage.getItem('maple_boss_schedules_v22') || '[]');
 }
 
-function saveCalendarRecords(list) {
-    localStorage.setItem('maple_calendar_records_v8', JSON.stringify(list));
+function saveBossSchedules(list) {
+    localStorage.setItem('maple_boss_schedules_v22', JSON.stringify(list));
 }
+
+function getBossHistory() {
+    return JSON.parse(localStorage.getItem('maple_boss_history_v2') || '{"bosses": [], "chars": []}');
+}
+
+function saveBossHistory(history) {
+    localStorage.setItem('maple_boss_history_v2', JSON.stringify(history));
+}
+
+function recordHistory(bossName, charName) {
+    let history = getBossHistory();
+    if (bossName && !history.bosses.includes(bossName)) history.bosses.push(bossName);
+    if (charName && !history.chars.includes(charName)) history.chars.push(charName);
+    saveBossHistory(history);
+}
+
+function removeHistoryItem(type, val, event) {
+    event.stopPropagation();
+    let history = getBossHistory();
+    if (type === 'boss') history.bosses = history.bosses.filter(b => b !== val);
+    else if (type === 'char') history.chars = history.chars.filter(c => c !== val);
+    saveBossHistory(history);
+    openScheduleModal(document.getElementById('modalTargetDay').value);
+}
+
+function openScheduleModal(dayIdx, defaultTime = null, editingId = null) {
+    const dayNames = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+    document.getElementById('modalTargetDay').value = dayIdx;
+    
+    const warningEl = document.getElementById('modalConflictWarning');
+    if (warningEl) warningEl.style.display = 'none';
+
+    if (editingId) {
+        let list = getBossSchedules();
+        let editingItem = list.find(ev => ev.id == editingId);
+        if (editingItem) {
+            document.getElementById('modalTitleText').textContent = `✍️ 보스 일정 수정`;
+            document.getElementById('modalEditingId').value = editingItem.id;
+            document.getElementById('modalBossTitle').value = editingItem.title;
+            document.getElementById('modalBossChar').value = editingItem.character;
+            document.getElementById('modalCharColorPicker').value = getCharacterTheme(editingItem.character);
+            document.getElementById('modalBossTime').value = editingItem.time;
+            document.getElementById('modalBossType').value = editingItem.type;
+            document.getElementById('modalBossChannel').value = editingItem.channel ? editingItem.channel.replace('채널 ', '') : '';
+            document.getElementById('modalBossMemo').value = editingItem.memo || '';
+        }
+    } else {
+        document.getElementById('modalTitleText').textContent = `➕ ${dayNames[dayIdx]} 보스 일정 추가`;
+        document.getElementById('modalEditingId').value = '';
+        document.getElementById('modalBossTitle').value = '';
+        if (defaultTime) rememberedModalTime = defaultTime;
+        document.getElementById('modalBossTime').value = rememberedModalTime;
+        document.getElementById('modalBossType').value = '고정';
+        document.getElementById('modalBossChannel').value = '';
+        document.getElementById('modalBossMemo').value = '';
+
+        const history = getBossHistory();
+        if (history.chars.length > 0) {
+            let firstChar = history.chars[0];
+            document.getElementById('modalBossChar').value = firstChar;
+            document.getElementById('modalCharColorPicker').value = getCharacterTheme(firstChar);
+        }
+    }
+    
+    const history = getBossHistory();
+    document.getElementById('modalBossChips').innerHTML = history.bosses.map(b => `<button type="button" class="quick-chip-item" onclick="document.getElementById('modalBossTitle').value='${b}'">${b}<span class="quick-chip-delete" onclick="removeHistoryItem('boss', '${b}', event)">✖</span></button>`).join('');
+    document.getElementById('modalCharChips').innerHTML = history.chars.map(c => `<button type="button" class="quick-chip-item" onclick="document.getElementById('modalBossChar').value='${c}'; syncModalColorWithChar('${c}');">${c}<span class="quick-chip-delete" onclick="removeHistoryItem('char', '${c}', event)">✖</span></button>`).join('');
+
+    document.getElementById('scheduleModalOverlay').classList.add('active');
+    checkModalTimeConflict();
+}
+
+function closeScheduleModal() {
+    document.getElementById('scheduleModalOverlay').classList.remove('active');
+}
+
+function checkModalTimeConflict() {
+    const dayIdx = parseInt(document.getElementById('modalTargetDay').value, 10);
+    const timeVal = document.getElementById('modalBossTime').value;
+    const editingId = document.getElementById('modalEditingId').value;
+    const warningEl = document.getElementById('modalConflictWarning');
+    
+    if (!warningEl || !timeVal) return;
+
+    const list = getBossSchedules();
+    const activeList = list.filter(item => {
+        if (editingId && item.id == editingId) return false;
+        if (item.type === '고정') return true;
+        return (item.createdWeekOffset !== undefined ? item.createdWeekOffset : 0) === weekOffset;
+    });
+
+    const isConflict = activeList.some(ev => ev.day === dayIdx && ev.time === timeVal);
+    warningEl.style.display = isConflict ? 'block' : 'none';
+}
+
+function submitModalSchedule() {
+    const dayIdx = parseInt(document.getElementById('modalTargetDay').value, 10);
+    const editingId = document.getElementById('modalEditingId').value;
+    const title = document.getElementById('modalBossTitle').value.trim();
+    const character = document.getElementById('modalBossChar').value.trim();
+    const charColor = document.getElementById('modalCharColorPicker').value;
+    const time = document.getElementById('modalBossTime').value;
+    
+    rememberedModalTime = time;
+    const type = document.getElementById('modalBossType').value;
+    
+    let rawChannel = document.getElementById('modalBossChannel').value.trim();
+    let channel = rawChannel ? (/^\d+$/.test(rawChannel) ? `채널 ${rawChannel}` : rawChannel) : '';
+    const memo = document.getElementById('modalBossMemo').value.trim();
+
+    if (!title) return alert('보스 이름을 입력해주세요!');
+    if (!character) return alert('참여 캐릭터 이름을 입력해주세요!');
+
+    let list = getBossSchedules();
+    const activeList = list.filter(item => {
+        if (editingId && item.id == editingId) return false;
+        if (item.type === '고정') return true;
+        return (item.createdWeekOffset !== undefined ? item.createdWeekOffset : 0) === weekOffset;
+    });
+
+    if (activeList.some(ev => ev.day === dayIdx && ev.time === time)) {
+        alert('해당 요일의 동일한 시간대에 이미 다른 일정이 존재합니다.');
+        return;
+    }
+
+    setCharacterColor(character, charColor);
+    recordHistory(title, character);
+
+    if (editingId) {
+        let item = list.find(ev => ev.id == editingId);
+        if (item) {
+            item.title = title;
+            item.character = character;
+            item.type = type;
+            item.day = dayIdx;
+            item.time = time;
+            item.channel = channel;
+            item.memo = memo;
+        }
+    } else {
+        list.push({
+            id: Date.now(),
+            title, character, type,
+            day: dayIdx,
+            time, channel, memo,
+            createdWeekOffset: weekOffset
+        });
+    }
+
+    saveBossSchedules(list);
+    closeScheduleModal();
+    renderBossDashboard();
+}
+
+function changeWeekOffset(offset) {
+    weekOffset += offset;
+    selectedCardId = null;
+    renderBossDashboard();
+}
+
+function resetWeekOffset() {
+    weekOffset = 0;
+    selectedCardId = null;
+    renderBossDashboard();
+}
+
+function handleDragStart(e, id) {
+    e.dataTransfer.setData('text/plain', id);
+}
+
+function handleDragOver(e) {
+    e.preventDefault();
+}
+
+function handleDrop(e, targetDayIdx) {
+    e.preventDefault();
+    const id = parseInt(e.dataTransfer.getData('text/plain'), 10);
+    if (!id) return;
+
+    let list = getBossSchedules();
+    let item = list.find(ev => ev.id === id);
+    if (!item) return;
+
+    let slotRow = e.target.closest('.timeline-slot-row');
+    if (!slotRow) return;
+
+    let targetTime = slotRow.getAttribute('data-time');
+    if (!targetTime) return;
+
+    const activeList = list.filter(ev => ev.id !== id && (ev.type === '고정' || (ev.createdWeekOffset || 0) === weekOffset));
+    if (activeList.some(ev => ev.day === targetDayIdx && ev.time === targetTime)) {
+        alert('해당 요일의 동일한 시간대에 이미 다른 일정이 존재합니다.');
+        return;
+    }
+
+    item.day = targetDayIdx;
+    item.time = targetTime;
+    saveBossSchedules(list);
+    renderBossDashboard();
+}
+
+function handleCardClick(id, event) {
+    event.stopPropagation();
+    selectedCardId = id;
+    renderBossDashboard();
+}
+
+function closeBottomDetails() {
+    selectedCardId = null;
+    renderBossDashboard();
+}
+
+function deleteBossSchedule(id, event) {
+    event.stopPropagation();
+    if (!confirm('이 파티 일정을 삭제하시겠습니까?')) return;
+    let list = getBossSchedules().filter(item => item.id !== id);
+    saveBossSchedules(list);
+    if (selectedCardId === id) selectedCardId = null;
+    renderBossDashboard();
+}
+
+/* 🕒 요일별 시간 라인 및 시간 도래 시 회색 처리 로직 (요일 옆 날짜 표기 추가) */
+function renderBossDashboard() {
+    const list = getBossSchedules();
+    const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
+    
+    const realTodayDay = new Date().getDay();
+    const now = new Date();
+    const currentHH = String(now.getHours()).padStart(2, '0');
+    const currentMM = String(now.getMinutes()).padStart(2, '0');
+    const currentTimeStr = `${currentHH}:${currentMM}`;
+
+    const activeList = list.filter(item => {
+        if (item.type === '고정') return true;
+        return (item.createdWeekOffset !== undefined ? item.createdWeekOffset : 0) === weekOffset;
+    });
+
+    let allTimesSet = new Set();
+    activeList.forEach(ev => allTimesSet.add(ev.time));
+    let sortedTimes = Array.from(allTimesSet).sort((a, b) => a.localeCompare(b));
+
+    const targetWeek = new Date();
+    targetWeek.setDate(targetWeek.getDate() + (weekOffset * 7));
+    const currentDayOfWeek = targetWeek.getDay();
+    const sunday = new Date(targetWeek);
+    sunday.setDate(targetWeek.getDate() - currentDayOfWeek);
+    const saturday = new Date(sunday);
+    saturday.setDate(saturday.getDate() + 6);
+
+    const formatDateStr = (d) => `${d.getMonth() + 1}.${String(d.getDate()).padStart(2, '0')}`;
+    let weekLabel = weekOffset === 0 ? `📅 이번 주 타임라인 (${formatDateStr(sunday)} ~ ${formatDateStr(saturday)})` :
+                    weekOffset > 0 ? `📅 +${weekOffset}주차 타임라인 (${formatDateStr(sunday)} ~ ${formatDateStr(saturday)})` :
+                    `📅 ${weekOffset}주차 타임라인 (${formatDateStr(sunday)} ~ ${formatDateStr(saturday)})`;
+
+    document.getElementById('currentWeekRangeLabel').textContent = weekLabel;
+
+    const timetableGrid = document.getElementById('timetableDaysGrid');
+    let gridHtml = '';
+
+    for (let i = 1; i <= 7; i++) {
+        const dayIdx = i % 7;
+        const isToday = (weekOffset === 0 && dayIdx === realTodayDay);
+        
+        // 💡 요일별 정확한 날짜 계산 (일요일~토요일)
+        const targetDayDate = new Date(sunday);
+        targetDayDate.setDate(sunday.getDate() + dayIdx);
+        const dateMonth = targetDayDate.getMonth() + 1;
+        const dateDay = targetDayDate.getDate();
+        const dateLabel = `${dateMonth}/${dateDay}`;
+
+        let bodyItemsHtml = '';
+
+        if (sortedTimes.length === 0) {
+            bodyItemsHtml = `<div style="text-align:center; color:var(--text-muted); font-size:11px; padding:25px 0;">등록된 일정 없음</div>`;
+        } else {
+            sortedTimes.forEach(timeSlot => {
+                const matchedEvent = activeList.find(ev => ev.day === dayIdx && ev.time === timeSlot);
+                
+                bodyItemsHtml += `<div class="timeline-slot-row" data-time="${timeSlot}">`;
+                if (matchedEvent) {
+                    const charColor = getCharacterTheme(matchedEvent.character);
+                    const isSelected = selectedCardId === matchedEvent.id ? 'selected' : '';
+
+                    let pastClass = '';
+                    if (isToday) {
+                        if (currentTimeStr >= matchedEvent.time) {
+                            pastClass = 'past-boss';
+                        }
+                    } else if (weekOffset < 0 || (weekOffset === 0 && dayIdx < realTodayDay)) {
+                        pastClass = 'past-boss';
+                    }
+
+                    bodyItemsHtml += `
+                    <div class="timetable-event-card ${isSelected} ${pastClass}" draggable="true" ondragstart="handleDragStart(event, ${matchedEvent.id})" onclick="handleCardClick(${matchedEvent.id}, event)" title="${matchedEvent.title} / ${matchedEvent.character}">
+                        <div style="display:flex; justify-content:space-between; align-items:center; pointer-events:none;">
+                            <span style="font-weight:bold; color:var(--text-color); font-size:12px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${matchedEvent.title}</span>
+                            <span style="font-size:10px; color:var(--accent-color); font-weight:bold; flex-shrink:0; margin-left:4px;">${matchedEvent.time}</span>
+                        </div>
+                        <div style="font-size:10px; color:${charColor}; font-weight:bold; margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; pointer-events:none;">
+                            👤 ${matchedEvent.character}
+                        </div>
+                    </div>
+                    `;
+                } else {
+                    bodyItemsHtml += `<div class="timeline-empty-slot" ondragover="handleDragOver(event)" ondrop="handleDrop(event, ${dayIdx})"></div>`;
+                }
+                bodyItemsHtml += `</div>`;
+            });
+        }
+
+        gridHtml += `
+        <div class="day-column ${isToday ? 'today' : ''}">
+            <div class="day-column-header">
+                <span>${dayNames[dayIdx]}요일 <span style="font-size:11px; color:var(--accent-color); font-weight:normal;">(${dateLabel})</span></span>
+                <button onclick="openScheduleModal(${dayIdx})">＋ 추가</button>
+            </div>
+            <div class="day-timeline-body" ondragover="handleDragOver(event)" ondrop="handleDrop(event, ${dayIdx})">
+                ${bodyItemsHtml}
+            </div>
+        </div>
+        `;
+    }
+
+    timetableGrid.innerHTML = gridHtml;
+
+    const bottomDetailsEl = document.getElementById('timetableBottomDetails');
+    const detailTitleEl = document.getElementById('bottomDetailTitle');
+    const detailContentEl = document.getElementById('bottomDetailContent');
+    const detailButtonsEl = document.getElementById('bottomDetailButtons');
+
+    if (selectedCardId) {
+        const selectedEvent = activeList.find(ev => ev.id === selectedCardId);
+        if (selectedEvent) {
+            const charColor = getCharacterTheme(selectedEvent.character);
+            const isFixed = selectedEvent.type === '고정';
+
+            detailTitleEl.textContent = `📌 [${dayNames[selectedEvent.day]}요일 ${selectedEvent.time}] ${selectedEvent.title}`;
+            detailContentEl.innerHTML = `
+                <div>⏰ 시각: <b>${selectedEvent.time}</b> (${dayNames[selectedEvent.day]}요일)</div>
+                <div>👤 참여 캐릭터: <span style="color:${charColor}; font-weight:bold;">${selectedEvent.character}</span></div>
+                <div>🏷️ 반복 유형: <b>${isFixed ? '🛡️ 매주 고정 파티' : '⚡ 이번 주만 일회성'}</b></div>
+                ${selectedEvent.channel ? `<div>📍 채널: <b>${selectedEvent.channel}</b></div>` : ''}
+                ${selectedEvent.memo ? `<div>📝 메모: <b>${selectedEvent.memo}</b></div>` : ''}
+            `;
+            detailButtonsEl.innerHTML = `
+                <button onclick="openScheduleModal(${selectedEvent.day}, null, ${selectedEvent.id})" style="background:#2563eb; color:white; font-size:12px; padding:6px 14px;">수정</button>
+                <button onclick="deleteBossSchedule(${selectedEvent.id}, event)" style="background:#ef4444; color:white; font-size:12px; padding:6px 14px;">삭제</button>
+            `;
+            bottomDetailsEl.classList.add('active');
+        } else {
+            bottomDetailsEl.classList.remove('active');
+        }
+    } else {
+        bottomDetailsEl.classList.remove('active');
+    }
+}
+
+/* 📅 자산 스케줄러 로직 */
+function getCalendarRecords() { return JSON.parse(localStorage.getItem('maple_calendar_records_v8') || '[]'); }
+function saveCalendarRecords(list) { localStorage.setItem('maple_calendar_records_v8', JSON.stringify(list)); }
 
 function changeMonth(direction) {
     currentDate.setMonth(currentDate.getMonth() + direction);
@@ -908,19 +917,13 @@ function changeMonth(direction) {
 function getAllUniqueItemNames() {
     const records = getCalendarRecords();
     let names = [...new Set(records.map(r => r.name))];
-    if (names.length === 0) {
-        names = ['솔 에르다 조각', '메소'];
-    }
+    if (names.length === 0) names = ['솔 에르다 조각', '메소'];
     return names;
 }
 
 function toggleDatePopup(dateStr, event) {
     if(event) event.stopPropagation();
-    if (activePopupDate === dateStr) {
-        activePopupDate = null;
-    } else {
-        activePopupDate = dateStr;
-    }
+    activePopupDate = (activePopupDate === dateStr) ? null : dateStr;
     renderCalendar();
 }
 
@@ -950,13 +953,7 @@ function addRecordFromPopup(dateStr, event) {
     if (isNaN(value)) return alert('올바른 숫자를 입력해주세요!');
 
     let records = getCalendarRecords();
-    records.push({
-        id: Date.now(),
-        date: dateStr,
-        name: name,
-        value: value
-    });
-
+    records.push({ id: Date.now(), date: dateStr, name, value });
     saveCalendarRecords(records);
     renderCalendar();
     
@@ -986,9 +983,7 @@ function renderCalendar() {
     const gridContainer = document.getElementById('calendarDaysGrid');
     let html = '';
 
-    for (let i = 0; i < firstDayIndex; i++) {
-        html += `<div class="calendar-cell empty"></div>`;
-    }
+    for (let i = 0; i < firstDayIndex; i++) html += `<div class="calendar-cell empty"></div>`;
 
     const records = getCalendarRecords();
     const uniqueNames = getAllUniqueItemNames();
@@ -1018,24 +1013,17 @@ function renderCalendar() {
 
         let popupHtml = '';
         if (activePopupDate === dateStr) {
-            let chipsHtml = uniqueNames.map(name => `
-                <button class="popup-chip" onclick="setPopupPreset('${name}')">+ ${name}</button>
-            `).join('');
-
+            let chipsHtml = uniqueNames.map(name => `<button class="popup-chip" onclick="setPopupPreset('${name}')">+ ${name}</button>`).join('');
             popupHtml = `
             <div class="day-popup-box active" style="top: 10px; left: 105%;" onclick="event.stopPropagation()">
                 <div class="popup-header">
                     <span>📅 ${dateStr} 등록</span>
                     <button onclick="closePopup(event)" style="background:transparent; border:none; color:white; font-size:12px; cursor:pointer;">✖</button>
                 </div>
-                <div class="popup-chips">
-                    ${chipsHtml}
-                </div>
+                <div class="popup-chips">${chipsHtml}</div>
                 <div class="popup-form">
                     <input type="text" id="popupName_${dateStr}" placeholder="항목 이름" onkeypress="if(event.key==='Enter') document.getElementById('popupVal_${dateStr}').focus()">
-                    <input type="number" id="popupVal_${dateStr}" placeholder="수치" value="1" 
-                           onfocus="this.select()" 
-                           onkeypress="if(event.key==='Enter') addRecordFromPopup('${dateStr}', event)">
+                    <input type="number" id="popupVal_${dateStr}" placeholder="수치" value="1" onfocus="this.select()" onkeypress="if(event.key==='Enter') addRecordFromPopup('${dateStr}', event)">
                     <button onclick="addRecordFromPopup('${dateStr}', event)" style="background:#10b981; color:#0f172a; padding:8px; font-size:13px;">➕ 추가하기</button>
                 </div>
             </div>
@@ -1048,9 +1036,7 @@ function renderCalendar() {
                 <div class="cell-date">${day} ${isToday ? '<span class="today-badge-text">오늘</span>' : ''}</div>
                 ${dayRecords.length > 0 ? `<span style="font-size:10px; color:var(--accent-color); font-weight:bold;">${dayRecords.length}건</span>` : ''}
             </div>
-            <div class="cell-content">
-                ${badgesHtml}
-            </div>
+            <div class="cell-content">${badgesHtml}</div>
             ${popupHtml}
         </div>
         `;
@@ -1063,28 +1049,20 @@ function renderCalendar() {
 function renderStatsSummary(year, month, records) {
     const summaryGrid = document.getElementById('statsSummaryGrid');
     const mmStr = String(month).padStart(2, '0');
-    
     const monthRecords = records.filter(r => r.date.startsWith(`${year}-${mmStr}`));
     const monthItemNames = [...new Set(monthRecords.map(r => r.name))];
 
     if (monthItemNames.length === 0) {
-        summaryGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:var(--text-muted); font-size:13px; padding:10px;">이번 달(${month}월) 기록된 자산/아이템 데이터가 없습니다. 달력 날짜를 클릭하여 추가해보세요!</div>`;
+        summaryGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:var(--text-muted); font-size:13px; padding:10px;">이번 달(${month}월) 기록된 자산/아이템 데이터가 없습니다.</div>`;
         return;
     }
 
-    let html = '';
-    monthItemNames.forEach(name => {
-        const itemMonthSum = monthRecords
-            .filter(r => r.name === name)
-            .reduce((acc, cur) => acc + cur.value, 0);
-
-        const totalSum = records
-            .filter(r => r.name === name)
-            .reduce((acc, cur) => acc + cur.value, 0);
-
+    summaryGrid.innerHTML = monthItemNames.map(name => {
+        const itemMonthSum = monthRecords.filter(r => r.name === name).reduce((acc, cur) => acc + cur.value, 0);
+        const totalSum = records.filter(r => r.name === name).reduce((acc, cur) => acc + cur.value, 0);
         const theme = getItemColor(name);
 
-        html += `
+        return `
         <div class="stat-card" style="border-left: 4px solid ${theme.color};">
             <div class="stat-card-title">📦 ${name}</div>
             <div style="font-size: 14px; color: var(--text-color); margin-bottom: 4px; font-weight:bold;">
@@ -1095,40 +1073,22 @@ function renderStatsSummary(year, month, records) {
             </div>
         </div>
         `;
-    });
-
-    summaryGrid.innerHTML = html;
+    }).join('');
 }
 
-function getSavedList() {
-    return JSON.parse(localStorage.getItem('maple_friends_list_v28') || '[]');
-}
-
-function saveList(list) {
-    localStorage.setItem('maple_friends_list_v28', JSON.stringify(list));
-}
-
-function getSavedGroups() {
-    return JSON.parse(localStorage.getItem('maple_custom_groups_v22') || '["친구"]');
-}
-
-function saveGroups(groups) {
-    localStorage.setItem('maple_custom_groups_v22', JSON.stringify(groups));
-}
+function getSavedList() { return JSON.parse(localStorage.getItem('maple_friends_list_v28') || '[]'); }
+function saveList(list) { localStorage.setItem('maple_friends_list_v28', JSON.stringify(list)); }
+function getSavedGroups() { return JSON.parse(localStorage.getItem('maple_custom_groups_v22') || '["친구"]'); }
+function saveGroups(groups) { localStorage.setItem('maple_custom_groups_v22', JSON.stringify(groups)); }
 
 function updateGroupDropdown(keepSelectedVal = null) {
     const select = document.getElementById('groupSelect');
+    if (!select) return;
     const currentVal = keepSelectedVal !== null ? keepSelectedVal : select.value;
     const groups = getSavedGroups();
-    
-    let html = groups.map(g => `<option value="${g}">${g}</option>`).join('');
-    select.innerHTML = html;
-    
-    if (currentVal && groups.includes(currentVal)) {
-        select.value = currentVal;
-    } else if (groups.length > 0) {
-        select.value = groups[0];
-    }
+    select.innerHTML = groups.map(g => `<option value="${g}">${g}</option>`).join('');
+    if (currentVal && groups.includes(currentVal)) select.value = currentVal;
+    else if (groups.length > 0) select.value = groups[0];
 }
 
 function createNewGroup() {
@@ -1147,8 +1107,8 @@ function createNewGroup() {
 
 function renderGroupTabs() {
     const tabsContainer = document.getElementById('groupTabs');
+    if (!tabsContainer) return;
     const groups = ['전체', ...getSavedGroups()];
-
     tabsContainer.innerHTML = groups.map(g => `
         <button class="tab-btn ${currentTab === g ? 'active' : ''}" onclick="switchTab('${g}')">${g}</button>
     `).join('');
@@ -1162,50 +1122,40 @@ function switchTab(groupName) {
 
 function checkIsBossSpec(equipmentData) {
     if (!equipmentData || !equipmentData.item_equipment) return false;
-    let starforceSum = 0;
-    let equippedCount = 0;
-    
+    let starforceSum = 0, equippedCount = 0;
     equipmentData.item_equipment.forEach(item => {
-        if (item.starforce) {
-            starforceSum += parseInt(item.starforce, 10) || 0;
-        }
+        if (item.starforce) starforceSum += parseInt(item.starforce, 10) || 0;
         equippedCount++;
     });
     return starforceSum >= 100 || equippedCount >= 10;
 }
 
+/* 💡 대폭 확장된 다채로운 진단 문장 풀 ('쌀먹' 단어 완전 배제) */
 function generateUniqueDiagnosis(level, lvlDiff, totalExpChange, isMax, isBossSpec) {
     if (level < 250) {
-        return { 
-            statusType: "inactive", 
-            badgeText: "💤 분석 불가", 
-            tag: "💤 [250 레벨 미만]", 
-            desc: `250 레벨 이하는 API 데이터 정책상 정밀 분석이 불가능합니다.` 
-        };
+        return { statusType: "inactive", badgeText: "💤 분석 불가", tag: "💤 [250 레벨 미만]", desc: `250 레벨 이하는 API 데이터 정책상 정밀 분석이 불가능합니다.` };
     }
-
     if (isMax) {
-        const maxTemplates = [
-            `만렙(Lv.300) 신화 속 영역에 도달하신 전설의 유저분이에요! 경험치 바는 멈췄지만 최상위 보스 레이드와 칠흑 파밍으로 서버를 지배하는 현역 라이프를 즐기는 중이시네요~`,
-            `최정상 만렙 300레벨의 고결한 품격! 더 오를 경험치는 없지만 매주 하드 보스를 싹쓸이하며 엔드 콘텐츠의 진수를 보여주고 계신 완벽한 만렙 고수예요.`,
-            `메이플 정점에 군림한 Lv.300 만렙 현역러! 사냥은 졸업했어도 주간 보스 숙제만큼은 철저히 소화하며 메세상을 호령하고 있는 멋진 모험가님이세요.`
+        const maxPool = [
+            `최정상 만렙 300레벨의 고결한 품격! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승을 기록하며 모든 월드의 부러움을 한몸에 받고 계시네요.`,
+            `메이플 월드의 정점에 선 300레벨 신화급 엔드게이머! 지난 7일간 +${totalExpChange.toFixed(3)}% 상승하며 완벽한 졸업 스펙을 뽐내고 계세요.`,
+            `더 이상 오를 곳이 없는 만렙의 품격! 지난 7일간 +${totalExpChange.toFixed(3)}% 상승하며 후배들의 귀감이 되고 있는 전설적인 존재예요.`
         ];
-        return { statusType: "psycho", badgeText: "🏆 만렙 신화급", tag: "🏆 [만렙 신화급 엔드게이머]", desc: maxTemplates[Math.floor(Math.random() * maxTemplates.length)] };
+        return { statusType: "psycho", badgeText: "🏆 만렙 신화급", tag: "🏆 [만렙 신화급 엔드게이머]", desc: maxPool[Math.floor(Math.random() * maxPool.length)] };
     }
-
     if (totalExpChange <= 0) {
         if (isBossSpec) {
-            const bossMulePool = [
-                `최근 7일간 사냥 경험치는 0%이지만 고스펙 장비 세팅이 번쩍번쩍 빛나고 있어요! 사냥은 칼같이 유기하고 주간 보스만 쏙쏙 골라먹는 영리한 보스돌이 부캐로 판명되었어요~`,
-                `일주일간 성장은 멈춰 있으나 장비 옵션과 스타포스로 미루어보아 주간 보스 쌀먹 및 숙제 레이드만 깔끔하게 도는 전형적인 보스 전문 부캐 라인이시네요.`
+            const bossPool = [
+                `사냥은 잠시 미뤄두고 주간 보스 파밍에 집중하는 영리한 보스 전문 부캐! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 변화로 알찬 수익을 올리고 있어요.`,
+                `고효율 주간 보스 클리어를 위한 전용 주차 캐릭터! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}%로 보스 토벌에 온 힘을 쏟고 있네요.`,
+                `사냥 효율 대신 확실한 보스 격파를 노린다! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}%로 깔끔한 주간 콘텐츠를 수행 중이에요.`
             ];
-            return { statusType: "boss", badgeText: "⚔️ 보스돌이 전문", tag: "🕵️‍♂️ [보스만 쏙쏙 골라먹는 보스돌이]", desc: bossMulePool[Math.floor(Math.random() * bossMulePool.length)] };
+            return { statusType: "boss", badgeText: "⚔️ 보스 주력 캐릭터", tag: "🕵️‍♂️ [보스 토벌 전문 캐릭터]", desc: bossPool[Math.floor(Math.random() * bossPool.length)] };
         }
-
         const restPool = [
-            `최근 7일간 경험치 변동이 전혀 없고 장비 스펙도 조용한 상태예요. 현실 세계의 바쁜 일정을 소화하며 편안한 재충전의 휴식기를 보내고 계신 듯해요~`,
-            `일주일 동안 사냥터에 발길을 끊고 에너지를 푹 충전 중이신 휴면 모드예요. 곧 다부진 모습으로 돌아오실 메이플 휴식기를 가지는 중이네요.`,
-            `현재 성장의 흔적이 감지되지 않아 조용히 숨고르기를 하는 휴식기 상태예요. 잠시 마음의 여유를 갖고 메캉스(메이플+바캉스)를 즐기는 중이신가 봐요!`
+            `최근 7일간 경험치 +${totalExpChange.toFixed(3)}%로 변동이 없어 편안한 재충전의 휴식기를 보내고 계신 듯해요. 잠시 숨을 고르는 중이네요!`,
+            `접속은 뜸하지만 마음만은 언제나 메이플에! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}%로 여유로운 휴식 타임을 즐기는 중이세요.`,
+            `잠시 현실 세계로 원정 떠난 사이 푹 쉬고 있는 캐릭터! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}%로 충전의 시간을 보내고 있어요.`
         ];
         return { statusType: "inactive", badgeText: "💤 조용한 휴식기", tag: "💤 [꿀맛 같은 휴식기]", desc: restPool[Math.floor(Math.random() * restPool.length)] };
     }
@@ -1221,190 +1171,83 @@ function generateUniqueDiagnosis(level, lvlDiff, totalExpChange, isMax, isBossSp
     const ratio = (totalExpChange / hardcoreThreshold) * 100;
 
     if (ratio >= 150) {
-        return { 
-            statusType: "psycho", 
-            badgeText: "🔥 영혼의 홈프로텍터", 
-            tag: "👑 [현실을 잊은 영혼의 홈프로텍터]", 
-            desc: `지난 7일간 무려 +${totalExpChange.toFixed(3)}%를 폭발적으로 상승시키셨어요! 사냥터 의자에 영혼을 저당 잡힌 채 몬스터를 학살 중이신 엄청난 광기의 홈프로텍터예요ㄷㄷ` 
-        };
+        const pool = [
+            `지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 폭발적 상승! 사냥터 의자에 영혼을 저당 잡힌 엄청난 광기의 홈프로텍터예요.`,
+            `의자와 하나가 되어 버린 무시무시한 사냥 귀신! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승하며 랭킹을 맹렬히 씹어먹고 있어요.`,
+            `현실보다 메이플 월드가 더 익숙한 분! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승이라는 초인적인 몰입도를 보여주네요.`
+        ];
+        return { statusType: "psycho", badgeText: "🔥 영혼의 홈프로텍터", tag: "👑 [현실을 잊은 영혼의 홈프로텍터]", desc: pool[Math.floor(Math.random() * pool.length)] };
     }
     if (ratio >= 100) {
-        return { 
-            statusType: "hardcore", 
-            badgeText: "⚡ 심연의 사냥광", 
-            tag: "⚡ [의자 방석이 녹아버린 사냥광]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 경험치를 밀어 올리셨어요! 엉덩이를 뗄 줄 모르는 진정한 하드코어 사냥러의 품격을 뿜어내고 계시네요!` 
-        };
-    }
-    if (ratio >= 95) {
-        return { 
-            statusType: "step90", 
-            badgeText: "🏆 월드 클래스", 
-            tag: "🏆 [완주를 목전에 둔 월드 클래스 랭커]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 채우셨어요! 목표치 완주를 코앞에 두고 눈에 불을 켜며 사냥에 매진하는 최상위 집중력이에요!` 
-        };
-    }
-    if (ratio >= 90) {
-        return { 
-            statusType: "step85", 
-            badgeText: "🌟 숨은 메카니크", 
-            tag: "🌟 [동선을 꿰뚫는 숨은 메카니크 고수]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 올리셨네요! 효율적인 사냥 동선과 빌드를 완벽하게 이해하고 묵묵히 레벨을 깎아내리는 고수 모드예요.` 
-        };
+        const pool = [
+            `지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승! 엉덩이를 뗄 줄 모르는 진정한 하드코어 사냥러예요. 방석이 녹아내렸어요!`,
+            `경험치통을 마구마구 찢어버리는 상남자 사냥 스타일! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승으로 불꽃 사냥 중이시네요.`,
+            `사냥터에서 땀방울이 마를 날이 없다! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승을 달성한 진정한 사냥 광인이에요.`
+        ];
+        return { statusType: "hardcore", badgeText: "⚡ 심연의 사냥광", tag: "⚡ [의자 방석이 녹아버린 사냥광]", desc: pool[Math.floor(Math.random() * pool.length)] };
     }
     if (ratio >= 85) {
-        return { 
-            statusType: "step80", 
-            badgeText: "💎 철인 마라토너", 
-            tag: "💎 [지치지 않는 철인 마라토너]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 경험치를 쌓으셨어요! 장거리 레이스도 숨 한번 안 차고 거뜬히 소화해 내는 엄청난 지구력의 마라토너시네요.` 
-        };
-    }
-    if (ratio >= 80) {
-        return { 
-            statusType: "step75", 
-            badgeText: "🏅 상위권 우등생", 
-            tag: "🏅 [숙제와 사냥을 잡는 우등생]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 달성하셨어요! 일일 퀘스트와 사냥 빌드를 척척 해내며 학급 반장 같은 모범적인 성장을 보여주고 있어요.` 
-        };
+        const pool = [
+            `지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승! 효율적인 사냥 동선으로 묵묵히 레벨을 깎아내리는 숨은 고수예요.`,
+            `빌드와 동선 연구의 대가! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승을 기록하며 깔끔하게 스펙업을 쌓아가는 중이시네요.`,
+            `손끝에서 뿜어져 나오는 극상의 사냥 효율! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승으로 감탄을 자아내고 있어요.`
+        ];
+        return { statusType: "step85", badgeText: "🌟 숨은 메카니크", tag: "🌟 [동선을 꿰뚫는 숨은 메카니크 고수]", desc: pool[Math.floor(Math.random() * pool.length)] };
     }
     if (ratio >= 75) {
-        return { 
-            statusType: "step70", 
-            badgeText: "🎖️ 칼각 잡힌 모범생", 
-            tag: "🎖️ [칼각 잡힌 스케줄러 모범생]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 성장이 있었어요! 하루 일과표를 철저하게 계산해서 접속 시간마다 알차게 경험치를 빨아들이는 모범생 스타일이에요.` 
-        };
-    }
-    if (ratio >= 70) {
-        return { 
-            statusType: "step65", 
-            badgeText: "🎯 황금 페이스 메이커", 
-            tag: "🎯 [이상적인 리듬의 페이스 메이커]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 올리셨네요! 과하지도 않고 모자라지도 않은 아주 이상적인 속도로 메이플 라이프를 즐기는 중이시네요.` 
-        };
+        const pool = [
+            `지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 달성! 일일 퀘스트와 사냥을 척척 해내는 모범생 우등생이에요.`,
+            `숙제와 성장을 한 치의 오차도 없이 해내는 반듯한 플레이어! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승을 기록 중이십니다.`,
+            `선생님들이 칭찬 마지않는 모범 사냥러! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승하며 탄탄대로를 걷고 있어요.`
+        ];
+        return { statusType: "step75", badgeText: "🏅 상위권 우등생", tag: "🏅 [숙제와 사냥을 잡는 우등생]", desc: pool[Math.floor(Math.random() * pool.length)] };
     }
     if (ratio >= 65) {
-        return { 
-            statusType: "step60", 
-            badgeText: "🔥 불타는 열정맨", 
-            tag: "🔥 [사냥터를 지지는 불타는 열정맨]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 경험치를 적립하셨어요! 가슴속 뜨거운 메이플 열정으로 사냥터 버닝 필드를 아주 활활 지져버리고 계세요!` 
-        };
-    }
-    if (ratio >= 60) {
-        return { 
-            statusType: "step55", 
-            badgeText: "💪 근성의 퀘스트 장인", 
-            tag: "💪 [내실을 탄탄히 다지는 장인]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 성실히 채우셨네요! 화려하진 않아도 묵묵하게 일퀘와 숙제를 다져나가는 듬직한 내실 장인이세요.` 
-        };
-    }
-    if (ratio >= 55) {
-        return { 
-            statusType: "step50", 
-            badgeText: "💼 메이플 주식회사 과장", 
-            tag: "💼 [출근 도장 찍는 메이플 과장님]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 발자취가 남았어요! 마치 회사 출근하듯 정해진 시간에 딱 접속해서 할 일을 깔끔하게 해치우는 베테랑 직장인 포스예요.` 
-        };
+        const pool = [
+            `지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승! 아주 이상적인 리듬과 속도로 메이플을 즐기고 계신 페이스 메이커예요.`,
+            `지치지 않는 안정적인 호흡의 레이스! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승을 기록하며 꾸준함의 대명사로 활약 중입니다.`,
+            `템포 조절의 신! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승을 이루어내며 알차게 메생을 가꾸고 계시네요.`
+        ];
+        return { statusType: "step65", badgeText: "🎯 황금 페이스 메이커", tag: "🎯 [이상적인 리듬의 페이스 메이커]", desc: pool[Math.floor(Math.random() * pool.length)] };
     }
     if (ratio >= 50) {
-        return { 
-            statusType: "step45", 
-            badgeText: "💼 갓생과 메생의 반반", 
-            tag: "💼 [현실과 게임을 반반 스까 먹는 능력자]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 올리셨네요! 현실 갓생 살기와 메이플 중독 사이의 절묘한 균형을 유지하며 알차게 성취를 거두셨네요.` 
-        };
-    }
-    if (ratio >= 45) {
-        return { 
-            statusType: "step40", 
-            badgeText: "🚶‍♂️ 느긋한 산책러", 
-            tag: "🚶‍♂️ [바람을 쐬며 걷는 느긋한 산책러]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 소소한 성장이 있었어요! 급할 것 하나 없다는 마인드로 콧바람을 쐬며 여유롭게 경치를 구경하며 사냥 중이시군요.` 
-        };
-    }
-    if (ratio >= 40) {
-        return { 
-            statusType: "step35", 
-            badgeText: "🚶‍♂️ 마을 마실러", 
-            tag: "🚶‍♂️ [사냥터보다 마을이 편한 마실러]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 올리셨네요! 사냥터 경마장보다는 헤네시스 앞마당에서 수다 떨거나 마실 다니는 게 더 체질이신가 봐요~` 
-        };
+        const pool = [
+            `지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승! 현실 갓생과 메이플 중독 사이의 절묘한 균형을 유지 중인 능력자예요.`,
+            `현생도 챙기고 메생도 챙기는 이 시대의 진정한 승리자! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승으로 반반 스까 먹는 중!`,
+            `일과 게임 두 마리 토끼를 모두 잡았다! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승하며 완벽한 워라밸을 보여주세요.`
+        ];
+        return { statusType: "step50", badgeText: "💼 갓생과 메생의 반반", tag: "💼 [현실과 게임을 반반 스까 먹는 능력자]", desc: pool[Math.floor(Math.random() * pool.length)] };
     }
     if (ratio >= 35) {
-        return { 
-            statusType: "step30", 
-            badgeText: "☕ 주말의 연금술사", 
-            tag: "☕ [주말에 에너지를 폭발시키는 연금술사]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 경험치를 쌓으셨어요! 평일에는 바쁘다 주말 한정으로 사냥 포션을 벌컥벌컥 마시며 달리는 주말형 연금술사예요.` 
-        };
+        const pool = [
+            `지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승! 가슴속 뜨거운 메이플 열정으로 버닝 필드를 불태우고 계세요.`,
+            `소소하지만 확실한 사냥의 재미를 아시는 분! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승하며 열정맨 타이틀을 획득하셨어요.`,
+            `식지 않는 불꽃 같은 사냥 열정! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승을 기록하며 즐겁게 레벨업 중이십니다.`
+        ];
+        return { statusType: "step35", badgeText: "🔥 불타는 열정맨", tag: "🔥 [사냥터를 지지는 불타는 열정맨]", desc: pool[Math.floor(Math.random() * pool.length)] };
     }
     if (ratio >= 30) {
-        return { 
-            statusType: "step25", 
-            badgeText: "☕ 여유로운 찻잔러", 
-            tag: "☕ [따뜻한 차 한잔의 여유 찻잔러]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 올리셨네요! 손에 찻잔을 들고 클래식 음악을 들으며 가볍고 우아하게 몬스터를 스치듯 잡아주고 계시네요.` 
-        };
+        const pool = [
+            `지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승! 손에 따뜻한 차 한잔을 들고 클래식 음악과 함께 우아하게 사냥 중이시네요.`,
+            `여유와 낭만이 가득한 메이플 라이프! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승하며 차분하게 플레이하고 계세요.`,
+            `바쁜 일상 속에서도 힐링을 찾는 찻잔러! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승이라는 평온한 성장을 맛보는 중입니다.`
+        ];
+        return { statusType: "step30", badgeText: "☕ 여유로운 찻잔러", tag: "☕ [따뜻한 차 한잔의 여유 찻잔러]", desc: pool[Math.floor(Math.random() * pool.length)] };
     }
-    if (ratio >= 25) {
-        return { 
-            statusType: "step20", 
-            badgeText: "🛋️ 로비의 터대주주", 
-            tag: "🛋️ [의자 코디와 친목의 터대주주]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 잔잔한 발자취가 남았어요! 사냥은 경치만 구경하고 의자에 앉아 캐시 코디 매칭과 친목 다지기에 올인 중인 로비의 유지예요.` 
-        };
-    }
-    if (ratio >= 20) {
-        return { 
-            statusType: "step15", 
-            badgeText: "🛋️ 메인 화면 감상러", 
-            tag: "🛋️ [브람스만 감상하는 메인 화면러]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 올리셨네요! 게임을 켜두고 메인 화면 브금(BGM)을 감상하거나 캐릭터 성형·헤어 돌리기에 심취해 계실 분이군요.` 
-        };
-    }
-    if (ratio >= 15) {
-        return { 
-            statusType: "step10", 
-            badgeText: "🍃 바람 같은 나그네", 
-            tag: "🍃 [공기만 쐬고 홀연히 떠나는 나그네]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 소소한 성장이 있었어요! 스르륵 접속해서 메이플 월드의 신선한 공기만 한 모금 마시고 바람처럼 사라지는 자유로운 영혼이에요.` 
-        };
-    }
-    if (ratio >= 10) {
-        return { 
-            statusType: "step5", 
-            badgeText: "🍃 가끔 찾는 별장 주인", 
-            tag: "🍃 [문만 열고 털고 가는 별장 주인]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%를 올리셨네요! 한 주에 딱 한두 번 문을 열고 가볍고 먼지만 털어내고 가는 소중한 별장 같은 캐릭터예요.` 
-        };
-    }
-    if (ratio >= 5) {
-        return { 
-            statusType: "monthly", 
-            badgeText: "🌱 새싹 발자국", 
-            tag: "🌱 [모래성에 새겨진 소중한 새싹 발자국]", 
-            desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 미세한 성장이 감지되었어요! 광활한 메이플 월드 모래사장에 아주 앙증맞고 귀여운 첫 발자국을 꾹 눌러 담고 가셨어요.` 
-        };
-    }
-
-    return { 
-        statusType: "monthly", 
-        badgeText: "💤 월간 방문객", 
-        tag: "💤 [한 달에 한 번 문안 인사 드리는 귀환러]", 
-        desc: `지난 7일간 +${totalExpChange.toFixed(3)}%의 발자취가 남았어요! 달력에 동그라미를 치고 한 달에 딱 한 번 생존 신고 겸 문안 인사 올리는 전설의 귀환러 유저분이세요~` 
-    };
+    const sproutPool = [
+        `지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승! 메이플 월드 모래성에 귀여운 소중한 새싹 발자국을 남기셨어요.`,
+        `이제 막 모험을 시작한 상큼한 새싹 러너! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승하며 푸른 초원을 누비고 있습니다.`,
+        `한 걸음 한 걸음 정성껏 내딛는 발걸음! 지난 7일간 경험치 +${totalExpChange.toFixed(3)}% 상승으로 앞으로가 더욱 기대되는 캐릭터예요.`
+    ];
+    return { statusType: "monthly", badgeText: "🌱 새싹 발자국", tag: "🌱 [모래성에 새겨진 소중한 새싹 발자국]", desc: sproutPool[Math.floor(Math.random() * sproutPool.length)] };
 }
 
-// 개별 캐릭터 데이터 가져오기
 async function fetchSingleCharacterData(charItem) {
     const name = charItem.name;
     try {
         const idData = await fetchApi(`https://open.api.nexon.com/maplestory/v1/id?character_name=${encodeURIComponent(name)}`);
         if (!idData || !idData.ocid) return charItem;
         const ocid = idData.ocid;
-
         const pastStr = getDateStr(7);
 
         const [todayData, pastData, unionData, equipmentData] = await Promise.all([
@@ -1418,15 +1261,11 @@ async function fetchSingleCharacterData(charItem) {
 
         const level = todayData.character_level;
         const unionLevel = unionData ? unionData.union_level : '정보 없음';
-
         const lvlDiff = pastData ? (level - pastData.character_level) : 0;
         const todayExp = parseFloat(todayData.character_exp_rate || 0);
         const pastExp = pastData ? parseFloat(pastData.character_exp_rate || 0) : 0;
         const totalExpChange = pastData ? ((lvlDiff * 100) + (todayExp - pastExp)) : 0;
-        const isMax = level >= 300;
-
-        const isBossSpec = checkIsBossSpec(equipmentData);
-        const diagnosis = generateUniqueDiagnosis(level, lvlDiff, totalExpChange, isMax, isBossSpec);
+        const diagnosis = generateUniqueDiagnosis(level, lvlDiff, totalExpChange, level >= 300, checkIsBossSpec(equipmentData));
 
         return {
             name: todayData.character_name,
@@ -1441,59 +1280,44 @@ async function fetchSingleCharacterData(charItem) {
             badgeText: diagnosis.badgeText,
             category: diagnosis.tag,
             desc: diagnosis.desc,
-            updatedAt: new Date().toLocaleTimeString(),
-            nextUpdateAt: getNextFixedRefreshTime()
+            updatedAt: new Date().toLocaleTimeString()
         };
     } catch (e) {
         return charItem;
     }
 }
 
-// 📌 순서 유지 일괄 갱신 함수
 async function fetchAllCharactersData(isManual = false) {
     const list = getSavedList();
     if (list.length === 0) {
         if (isManual) alert('갱신할 등록 캐릭터가 없습니다.');
         return;
     }
-
     const loading = document.getElementById('loading');
     if (isManual) {
         loading.textContent = '🔄 전체 캐릭터 최신 데이터 일괄 갱신 중...';
         loading.style.display = 'block';
     }
-
     const updatedList = await Promise.all(list.map(char => fetchSingleCharacterData(char)));
-    
     saveList(updatedList);
     renderSavedCards();
-
     if (isManual) {
         loading.style.display = 'none';
         loading.textContent = '캐릭터 데이터를 분석하여 진단 문장을 생성하는 중...';
     }
 }
 
-// ⏱️ [전체 갱신] 갱신 완료 안내 + 10초 쿨타임 분리 로직
 async function manualRefreshAllCharacters() {
     const btn = document.getElementById('btnRefreshAll');
     if (btn.disabled) return;
-
     btn.disabled = true;
-    
-    // 1단계: 순식간에 실제 데이터 갱신 실행
     await fetchAllCharactersData(true);
-
-    // 2단계: 갱신 완료 즉시 알림 및 버튼 문구 변경
     let secondsLeft = 10;
     btn.textContent = `⏳ 쿨타임 (${secondsLeft}초)`;
-
-    // 3단계: 남은 10초 동안은 갱신 중이 아니라 '쿨타임 대기' 상태로 안내
     const timer = setInterval(() => {
         secondsLeft--;
-        if (secondsLeft > 0) {
-            btn.textContent = `⏳ 쿨타임 (${secondsLeft}초)`;
-        } else {
+        if (secondsLeft > 0) btn.textContent = `⏳ 쿨타임 (${secondsLeft}초)`;
+        else {
             clearInterval(timer);
             btn.disabled = false;
             btn.textContent = '🔄 전체 갱신';
@@ -1501,7 +1325,6 @@ async function manualRefreshAllCharacters() {
     }, 1000);
 }
 
-// 검색창에서 신규 캐릭터 추가 시 사용되는 기존 함수
 async function addOrUpdateCharacter(targetName = null) {
     const nameInput = document.getElementById('charName');
     const name = targetName || nameInput.value.trim();
@@ -1516,8 +1339,7 @@ async function addOrUpdateCharacter(targetName = null) {
 
     try {
         const existingList = getSavedList();
-        const existingItem = existingList.find(i => i.name === name) || { name: name, group: selectedGroup };
-        
+        const existingItem = existingList.find(i => i.name === name) || { name, group: selectedGroup };
         const updatedChar = await fetchSingleCharacterData(existingItem);
         if (!updatedChar.world) throw new Error(`'${name}' 캐릭터를 찾을 수 없습니다.`);
 
@@ -1527,11 +1349,8 @@ async function addOrUpdateCharacter(targetName = null) {
 
         renderGroupTabs();
         renderSavedCards();
-        if (!targetName) {
-            nameInput.value = '';
-        }
+        if (!targetName) nameInput.value = '';
         loading.style.display = 'none';
-
     } catch (err) {
         alert(err.message);
         loading.style.display = 'none';
@@ -1550,12 +1369,11 @@ function updateCharacterGroup(name, newGroup) {
 
 function renderSavedCards() {
     const container = document.getElementById('cardContainer');
+    if (!container) return;
     let list = getSavedList();
     const groups = getSavedGroups();
 
-    if (currentTab !== '전체') {
-        list = list.filter(char => char.group === currentTab);
-    }
+    if (currentTab !== '전체') list = list.filter(char => char.group === currentTab);
 
     if (list.length === 0) {
         container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 30px;">등록된 캐릭터가 없습니다. 상단에서 닉네임을 검색해 추가해보세요!</div>`;
@@ -1563,32 +1381,16 @@ function renderSavedCards() {
     }
 
     container.innerHTML = list.map(char => {
-        let groupOptions = ``;
-        groups.forEach(g => {
-            groupOptions += `<option value="${g}" ${char.group === g ? 'selected' : ''}>${g}</option>`;
-        });
-
+        let groupOptions = groups.map(g => `<option value="${g}" ${char.group === g ? 'selected' : ''}>${g}</option>`).join('');
         let badgeClass = 'badge-active';
         if (char.statusType === 'psycho') badgeClass = 'badge-psycho';
         else if (char.statusType === 'hardcore') badgeClass = 'badge-hardcore';
-        else if (char.statusType === 'step90') badgeClass = 'badge-step90';
         else if (char.statusType === 'step85') badgeClass = 'badge-step85';
-        else if (char.statusType === 'step80') badgeClass = 'badge-step80';
         else if (char.statusType === 'step75') badgeClass = 'badge-step75';
-        else if (char.statusType === 'step70') badgeClass = 'badge-step70';
         else if (char.statusType === 'step65') badgeClass = 'badge-step65';
-        else if (char.statusType === 'step60') badgeClass = 'badge-step60';
-        else if (char.statusType === 'step55') badgeClass = 'badge-step55';
         else if (char.statusType === 'step50') badgeClass = 'badge-step50';
-        else if (char.statusType === 'step45') badgeClass = 'badge-step45';
-        else if (char.statusType === 'step40') badgeClass = 'badge-step40';
         else if (char.statusType === 'step35') badgeClass = 'badge-step35';
         else if (char.statusType === 'step30') badgeClass = 'badge-step30';
-        else if (char.statusType === 'step25') badgeClass = 'badge-step25';
-        else if (char.statusType === 'step20') badgeClass = 'badge-step20';
-        else if (char.statusType === 'step15') badgeClass = 'badge-step15';
-        else if (char.statusType === 'step10') badgeClass = 'badge-step10';
-        else if (char.statusType === 'step5') badgeClass = 'badge-step5';
         else if (char.statusType === 'monthly') badgeClass = 'badge-monthly';
         else if (char.statusType === 'boss') badgeClass = 'badge-boss';
         else if (char.statusType === 'inactive') badgeClass = 'badge-inactive';
@@ -1596,37 +1398,26 @@ function renderSavedCards() {
         return `
         <div class="card">
             <button class="btn-delete-top" onclick="removeCharacter('${char.name}')">삭제</button>
-
             <div class="profile-header">
                 <div class="char-img"><img src="${char.image}" alt="캐릭터"></div>
                 <div style="flex:1;">
                     <div style="font-size: 18px; font-weight: bold; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
                         ${char.name}
-                        <select class="group-select-inline" onchange="updateCharacterGroup('${char.name}', this.value)">
-                            ${groupOptions}
-                        </select>
+                        <select class="group-select-inline" onchange="updateCharacterGroup('${char.name}', this.value)">${groupOptions}</select>
                     </div>
                     <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">${char.world} / ${char.className}</div>
                     <div style="font-size: 14px; margin-top: 5px; font-weight: bold;">
                         Lv.${char.level} <span style="font-size:12px; color:var(--text-muted);">(${char.expRate}%)</span>
                     </div>
-                    <div style="font-size: 12px; color: #38bdf8; margin-top: 2px; font-weight: bold;">
-                        🛡️ 유니온: ${char.union}
-                    </div>
-                    <div>
-                        <span class="badge ${badgeClass}">
-                            ${char.badgeText || '🔥 활발히 플레이 중!'}
-                        </span>
-                    </div>
+                    <div style="font-size: 12px; color: #38bdf8; margin-top: 2px; font-weight: bold;">🛡️ 유니온: ${char.union}</div>
+                    <div><span class="badge ${badgeClass}">${char.badgeText || '🔥 활발히 플레이 중!'}</span></div>
                 </div>
             </div>
-            
             <div class="summary-box">
                 <div><span class="category-tag">${char.category}</span></div>
                 <div class="summary-content">📌 <b>상태 진단:</b> ${char.desc}</div>
                 <div class="summary-footer">
                     <span>갱신: ${char.updatedAt || '방금 전'}</span>
-                    <span>(다음 자동 갱신: ${char.nextUpdateAt || '오전/오후 12시'})</span>
                 </div>
             </div>
         </div>
@@ -1636,8 +1427,32 @@ function renderSavedCards() {
 
 function removeCharacter(name) {
     if (!confirm(`'${name}' 캐릭터를 목록에서 삭제하시겠습니까?`)) return;
-    let list = getSavedList().filter(item => item.name !== name);
-    saveList(list);
+    saveList(getSavedList().filter(item => item.name !== name));
+    renderSavedCards();
+}
+
+function updateGroupDropdown(keepSelectedVal = null) {
+    const select = document.getElementById('groupSelect');
+    if (!select) return;
+    const currentVal = keepSelectedVal !== null ? keepSelectedVal : select.value;
+    const groups = getSavedGroups();
+    select.innerHTML = groups.map(g => `<option value="${g}">${g}</option>`).join('');
+    if (currentVal && groups.includes(currentVal)) select.value = currentVal;
+    else if (groups.length > 0) select.value = groups[0];
+}
+
+function renderGroupTabs() {
+    const tabsContainer = document.getElementById('groupTabs');
+    if (!tabsContainer) return;
+    const groups = ['전체', ...getSavedGroups()];
+    tabsContainer.innerHTML = groups.map(g => `
+        <button class="tab-btn ${currentTab === g ? 'active' : ''}" onclick="switchTab('${g}')">${g}</button>
+    `).join('');
+}
+
+function switchTab(groupName) {
+    currentTab = groupName;
+    renderGroupTabs();
     renderSavedCards();
 }
 </script>
